@@ -9,6 +9,13 @@ public class Bilet {
 	private boolean autoryzacja = false;
 
 	private boolean zwrot = false;
+
+	public Bilet() {
+		this.id = -1;
+		this.idLotu = -1;
+		this.miejsce = -1;
+		this.cena = -1.0f;
+	}
 	/**
 	 * 
 	 * @param c_id
@@ -22,6 +29,10 @@ public class Bilet {
 		this.miejsce = c_miejsce;
 		this.cena = c_cena;
 	}
+
+	public void oznaczDoZwrotu() { this.zwrot = true; }
+
+
 
 	public int getIdLotu() {
 		return this.idLotu;

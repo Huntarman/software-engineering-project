@@ -10,18 +10,32 @@ public class Klient {
 	private String email;
 	private int nr_telefonu;
 	private int nr_kontaBank;
+	private float saldo = 0.0f;
 	private ArrayList<Bilet> bilety = new ArrayList<>();
+	
+	public Klient() {
+		id = -1;
+		imie = null;
+		nazwisko = null;
+		email = null;
+		nr_telefonu = -1;
+		nr_kontaBank = -1;
+	}
 
 	/**
-	 * 
+	 *
 	 * @param c_id
 	 * @param c_imie
 	 * @param c_nazwisko
 	 * @param c_email
 	 */
 	public Klient(int c_id, String c_imie, String c_nazwisko, String c_email) {
-		// TODO - implement Klient.Klient
-		throw new UnsupportedOperationException();
+		id = c_id;
+		imie = c_imie;
+		nazwisko = c_nazwisko;
+		email = c_email;
+		nr_telefonu = -1;
+		nr_kontaBank = -1;
 	}
 
 	/**
@@ -34,8 +48,52 @@ public class Klient {
 	 * @param c_nr_kontaBank
 	 */
 	public Klient(int c_id, String c_imie, String c_nazwisko, String c_email, int c_nr_telefonu, int c_nr_kontaBank) {
-		// TODO - implement Klient.Klient
-		throw new UnsupportedOperationException();
+		this(c_id, c_imie, c_nazwisko, c_email);
+		nr_telefonu = c_nr_telefonu;
+		nr_kontaBank = c_nr_kontaBank;
+	}
+
+	public Bilet szukajBilet(int idBilet) {
+		for (Bilet c : bilety) {
+			if (c.id == idBilet) {
+				return c;
+			}
+		}
+
+		return new Bilet();
+	}
+
+	public boolean usunBilet(int idBilet) {
+		for (Bilet d : bilety) {
+			if (d.id == idBilet) {
+				bilety.remove(d);
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	public boolean dodajBilet(Bilet bilet) {
+		return bilety.add(bilet);
+	}
+
+	public boolean wyslijBilet(Bilet bilet) {
+		System.out.println("Bilet ID: " + bilet.id + " " +
+				"\nklienta: " + this.imie + " " + this.nazwisko +
+				"\nDla lotu: " + bilet.getIdLotu() +
+				"\nMiejsce: " + bilet.getMiejsce() +
+				"\nCena: " + bilet.getCena());
+		return true;
+	}
+
+	public boolean pobierzOplate(Bilet bilet) {
+		if (this.saldo >= bilet.getCena()) {
+			this.saldo -= bilet.getCena();
+			// TODO: INNE?
+			return true;
+		}
+		else return false;
 	}
 
 	public String getImie() {
@@ -86,18 +144,23 @@ public class Klient {
 		this.nr_telefonu = nr_telefonu;
 	}
 
-	public ArrayList<Bilet> getBilety() {
-		// TODO - implement Klient.getBilety
-		throw new UnsupportedOperationException();
+	public int getNr_kontaBank() {
+		return this.nr_telefonu;
 	}
+
+	/**
+	 *
+	 * @param nr_kontaBank
+	 */
+	public void setNr_kontaBank(int nr_kontaBank) {
+		this.nr_kontaBank = nr_kontaBank;
+	}
+	public ArrayList<Bilet> getBilety() { return bilety; }
 
 	/**
 	 * 
 	 * @param bilety
 	 */
-	public void setBilety(ArrayList<Bilet> bilety) {
-		// TODO - implement Klient.setBilety
-		throw new UnsupportedOperationException();
-	}
+	public void setBilety(ArrayList<Bilet> bilety) { this.bilety = bilety; }
 
 }

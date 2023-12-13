@@ -54,6 +54,7 @@ public class Aplikacja {
 	 */
 	public boolean zwrotBiletu(Klient daneKlient, int idBilet) {
 		//daneKlient.getBilety().get(/// TODO: 13.12.2023 ).setZwrot(true);
+		return false;
 	}
 
 	/**
