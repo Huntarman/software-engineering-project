@@ -1,10 +1,15 @@
 package classDiagram.system.model;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Pilot extends Pracownik {
 
-	private ArrayList<String> godzinyPrzypisane;
+	private HashMap<Integer, ArrayList<LocalDateTime>> godzinyPrzypisane;
+
 
 	/**
 	 * 
@@ -15,7 +20,6 @@ public class Pilot extends Pracownik {
 	public Pilot(int c_id, String c_imie, String c_nazwisko) {
 		super(c_id,c_imie,c_nazwisko);
 
-		throw new UnsupportedOperationException();
 	}
 
 	public boolean mozeAutoryzowac() {
@@ -27,18 +31,19 @@ public class Pilot extends Pracownik {
 	 * @param lot
 	 */
 	public void przypiszDoLotu(Lot lot) {
-		// TODO - implement Pilot.przypiszDoLotu
-
+		addGodzinyPrzypisane(lot);
 	}
 
 	/**
 	 * 
-	 * @param godzWylot
-	 * @param godzPrzylot
+	 * @param lot
 	 */
-	public boolean czyDostepny(String godzWylot, String godzPrzylot) {
-		//todo
-		return false;
+	public boolean czyDostepny(Lot lot) {
+		for (Map.Entry<Integer, ArrayList<LocalDateTime>> entry : godzinyPrzypisane.entrySet()) {
+			if (!(lot.getDataWylot().isAfter(entry.getValue().get(0)) && lot.getDataPrzylot().isBefore(entry.getValue().get(1))))
+				return false;
+		}
+		return true;
 	}
 
 	/**
@@ -46,20 +51,19 @@ public class Pilot extends Pracownik {
 	 * @param lot
 	 */
 	public void usunPrzypisanieDoLotu(Lot lot) {
-
-		throw new UnsupportedOperationException();
+		godzinyPrzypisane.remove(lot.id);
 	}
 
-	public ArrayList<String> getGodzinyPrzypisane() {
+	public HashMap<Integer, ArrayList<LocalDateTime>> getGodzinyPrzypisane() {
 		return this.godzinyPrzypisane;
 	}
 
 	/**
 	 * 
-	 * @param godzinyPrzypisane
+	 * @param lot
 	 */
-	public void setGodzinyPrzypisane(ArrayList<String> godzinyPrzypisane) {
-		this.godzinyPrzypisane = godzinyPrzypisane;
+	public void addGodzinyPrzypisane (Lot lot){
+		this.godzinyPrzypisane.put(lot.id,(ArrayList<LocalDateTime>) Arrays.asList(lot.getDataWylot(),lot.getDataPrzylot()));
 	}
 
 }

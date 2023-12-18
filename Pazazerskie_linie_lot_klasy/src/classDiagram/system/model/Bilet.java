@@ -1,11 +1,17 @@
 package classDiagram.system.model;
 
+import java.time.LocalDateTime;
+
 public class Bilet {
 
 	protected int id;
 	private int idLotu;
 	private int miejsce;
 	private float cena;
+	private LocalDateTime data_wylot;
+	private LocalDateTime data_przylot;
+	private String miejsceWylot;
+	private String miejscePrzylot;
 	private boolean autoryzacja = false;
 
 	private boolean zwrot = false;
@@ -22,8 +28,9 @@ public class Bilet {
 	 * @param c_idLotu
 	 * @param c_miejsce
 	 * @param c_cena
+	 *
 	 */
-	public Bilet(int c_id, int c_idLotu, int c_miejsce, float c_cena) {
+	public Bilet(int c_id, int c_idLotu,int c_miejsce, LocalDateTime data_wylot,LocalDateTime data_przylot,String miejsceWylot, String miejscePrzylot, float c_cena) {
 		this.id = c_id;
 		this.idLotu = c_idLotu;
 		this.miejsce = c_miejsce;
@@ -33,6 +40,9 @@ public class Bilet {
 	public void oznaczDoZwrotu() { this.zwrot = true; }
 
 
+	public int getId() {
+		return id;
+	}
 
 	public int getIdLotu() {
 		return this.idLotu;

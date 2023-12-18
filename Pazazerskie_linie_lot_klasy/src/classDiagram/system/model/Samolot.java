@@ -1,16 +1,17 @@
 package classDiagram.system.model;
 
-import java.util.ArrayList;
+import java.time.LocalDateTime;
+import java.util.*;
 
 public class Samolot {
 
 	protected int id;
 	private String model;
 	private int iloscMiejsc;
-	private ArrayList<String> godzinyPrzypisane;
+	private HashMap<Integer, ArrayList<LocalDateTime>> godzinyPrzypisane;
 	private double wyposazenie;
+
 	/**
-	 * 
 	 * @param c_id
 	 * @param c_model
 	 * @param c_iloscMiejsc
@@ -24,31 +25,30 @@ public class Samolot {
 	}
 
 	/**
-	 * 
 	 * @param lot
 	 */
 	public void przypiszDoLotu(Lot lot) {
-		// TODO - implement Samolot.przypiszDoLotu
-		throw new UnsupportedOperationException();
+		addGodzinyPrzypisane(lot);
 	}
 
 	/**
-	 * 
-	 * @param godzWylot
-	 * @param godzPrzylot
+	 * @param lot
 	 */
-	public boolean czyDostepny(String godzWylot, String godzPrzylot) {
-		// TODO - implement Samolot.czyDostepny
-		throw new UnsupportedOperationException();
+	public boolean czyDostepny(Lot lot) {
+		for (Map.Entry<Integer, ArrayList<LocalDateTime>> entry : godzinyPrzypisane.entrySet()) {
+			if (!(lot.getDataWylot().isAfter(entry.getValue().get(0)) && lot.getDataPrzylot().isBefore(entry.getValue().get(1))))
+				return false;
+		}
+		return true;
 	}
 
 	/**
-	 * 
+	 *
 	 * @param lot
 	 */
 	public void usunPrzypisanieDoLotu(Lot lot) {
-		// TODO - implement Samolot.usunPrzypisanieDoLotu
-		throw new UnsupportedOperationException();
+		this.godzinyPrzypisane.remove(lot.id);
+		this.wyposazenie -= 0.1;
 	}
 
 	public int getIloscMiejsc() {
@@ -56,7 +56,7 @@ public class Samolot {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param iloscMiejsc
 	 */
 	public void setIloscMiejsc(int iloscMiejsc) {
@@ -68,23 +68,27 @@ public class Samolot {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param model
 	 */
 	public void setModel(String model) {
 		this.model = model;
 	}
 
-	public ArrayList<String> getGodzinyPrzypisane() {
+	public HashMap<Integer, ArrayList<LocalDateTime>> getGodzinyPrzypisane() {
 		return this.godzinyPrzypisane;
 	}
 
 	/**
-	 * 
-	 * @param godzinyPrzypisane
+	 *
+	 * @param lot
 	 */
-	public void setGodzinyPrzypisane(ArrayList<String> godzinyPrzypisane) {
-		this.godzinyPrzypisane = godzinyPrzypisane;
+	public void addGodzinyPrzypisane(Lot lot) {
+		this.godzinyPrzypisane.put(lot.id,(ArrayList<LocalDateTime>)Arrays.asList(lot.getDataWylot(),lot.getDataPrzylot()));
+	}
+
+	public void dodajWyposazenie(double nowe_wyposazenie){
+		this.wyposazenie += nowe_wyposazenie;
 	}
 
 }

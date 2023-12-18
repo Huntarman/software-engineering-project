@@ -1,5 +1,7 @@
 package classDiagram.system.model;
 
+import classDiagram.system.Aplikacja;
+
 import java.util.ArrayList;
 
 public class Klient {
@@ -47,10 +49,11 @@ public class Klient {
 	 * @param c_nr_telefonu
 	 * @param c_nr_kontaBank
 	 */
-	public Klient(int c_id, String c_imie, String c_nazwisko, String c_email, int c_nr_telefonu, int c_nr_kontaBank) {
+	public Klient(int c_id, String c_imie, String c_nazwisko, String c_email, int c_nr_telefonu, int c_nr_kontaBank, int saldo) {
 		this(c_id, c_imie, c_nazwisko, c_email);
 		nr_telefonu = c_nr_telefonu;
 		nr_kontaBank = c_nr_kontaBank;
+		this.saldo = saldo;
 	}
 
 	public Bilet szukajBilet(int idBilet) {
@@ -74,11 +77,11 @@ public class Klient {
 		return false;
 	}
 
-	public boolean dodajBilet(Bilet bilet) {
+	/*public boolean dodajBilet(Bilet bilet) {
 		return bilety.add(bilet);
-	}
+	}*/
 
-	public boolean wyslijBilet(Bilet bilet) {
+	public boolean printBilet(Bilet bilet) {
 		System.out.println("Bilet ID: " + bilet.id + " " +
 				"\nklienta: " + this.imie + " " + this.nazwisko +
 				"\nDla lotu: " + bilet.getIdLotu() +

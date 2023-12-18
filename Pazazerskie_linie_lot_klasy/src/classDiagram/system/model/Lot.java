@@ -1,54 +1,66 @@
 package classDiagram.system.model;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-
 public class Lot {
 
 	protected int id;
+
+	private LocalDateTime data_wylot;
+	private LocalDateTime data_przylot;
 	private String miejsceWylot;
-	private String godzWylot;
 	private String miejscePrzylot;
-	private String godzPrzylot;
 	private Samolot samolot;
 	private float wyposazenie;
 	private ArrayList<Pilot> piloci = new ArrayList<>();
 	private ArrayList<PersonelPokladowy> personelPokladowy = new ArrayList<>();
+	private int cena;
+
+	private int maxMiejsc;
+	private int dostepnychMiejsc;
 
 	/**
-	 * 
+	 *
 	 * @param c_id
 	 * @param c_miejsceWylot
-	 * @param c_godzWylot
+	 * @param c_dataWylot
 	 * @param c_miejscePrzylot
-	 * @param c_godzPrzylot
+	 * @param c_dataPrzylot
 	 * @param c_piloci
 	 * @param c_personelPokladowy
+	 * @param cena
 	 */
-	public Lot(int c_id, String c_miejsceWylot, String c_godzWylot, String c_miejscePrzylot, String c_godzPrzylot, ArrayList<Pilot> c_piloci, ArrayList<PersonelPokladowy> c_personelPokladowy) {
+	public Lot(int c_id, String c_miejsceWylot, LocalDateTime c_dataWylot, String c_miejscePrzylot, LocalDateTime c_dataPrzylot, ArrayList<Pilot> c_piloci, ArrayList<PersonelPokladowy> c_personelPokladowy, int cena, int maxMiejsc) {
 		this.id = c_id;
 		this.miejsceWylot = c_miejsceWylot;
-		this.godzWylot = c_godzWylot;
 		this.miejscePrzylot = c_miejscePrzylot;
-		this.godzPrzylot = c_godzPrzylot;
+		this.data_przylot = c_dataPrzylot;
+		this.data_wylot = c_dataWylot;
 		this.piloci = c_piloci;
 		this.personelPokladowy = c_personelPokladowy;
+		this.cena = cena;
+		this.maxMiejsc = maxMiejsc;
+		this.dostepnychMiejsc = this.maxMiejsc;
 	}
 
 	/**
-	 * 
+	 *
 	 * @param c_id
 	 * @param c_miejsceWylot
-	 * @param c_godzWylot
+	 * @param c_dataWylot
 	 * @param c_miejscePrzylot
-	 * @param c_godzPrzylot
+	 * @param c_dataPrzylot
+	 * @param cena
 	 */
-	public Lot(int c_id, String c_miejsceWylot, String c_godzWylot, String c_miejscePrzylot, String c_godzPrzylot) {
+	public Lot(int c_id, String c_miejsceWylot, LocalDateTime c_dataWylot, String c_miejscePrzylot, LocalDateTime c_dataPrzylot, int cena, int maxMiejsc) {
 		this.id = c_id;
 		this.miejsceWylot = c_miejsceWylot;
-		this.godzWylot = c_godzWylot;
+		this.data_wylot = c_dataWylot;
 		this.miejscePrzylot = c_miejscePrzylot;
-		this.godzPrzylot = c_godzPrzylot;
-		throw new UnsupportedOperationException();
+		this.data_przylot = c_dataPrzylot;
+		this.cena = cena;
+		this.maxMiejsc = maxMiejsc;
+		this.dostepnychMiejsc = this.maxMiejsc;
 	}
 
 	public String getMiejsceWylot() {
@@ -56,23 +68,27 @@ public class Lot {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param miejsceWylot
 	 */
 	public void setMiejsceWylot(String miejsceWylot) {
 		this.miejsceWylot = miejsceWylot;
 	}
 
-	public String getGodzWylot() {
-		return this.godzWylot;
+	public int getId() {
+		return id;
+	}
+
+	public LocalDateTime getDataWylot() {
+		return this.data_wylot;
 	}
 
 	/**
-	 * 
-	 * @param godzWylot
+	 *
+	 * @param dataWylot
 	 */
-	public void setGodzWylot(String godzWylot) {
-		this.godzWylot = godzWylot;
+	public void setDataWylot(LocalDateTime dataWylot) {
+		this.data_wylot = dataWylot;
 	}
 
 	public String getMiejscePrzylot() {
@@ -80,23 +96,23 @@ public class Lot {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param miejscePrzylot
 	 */
 	public void setMiejscePrzylot(String miejscePrzylot) {
 		this.miejscePrzylot = miejscePrzylot;
 	}
 
-	public String getGodzPrzylot() {
-		return this.godzPrzylot;
+	public LocalDateTime getDataPrzylot() {
+		return this.data_przylot;
 	}
 
 	/**
-	 * 
-	 * @param godzPrzylot
+	 *
+	 * @param dataPrzylot
 	 */
-	public void setGodzPrzylot(String godzPrzylot) {
-		this.godzPrzylot = godzPrzylot;
+	public void setGodzPrzylot(LocalDateTime dataPrzylot) {
+		this.data_przylot = dataPrzylot;
 	}
 
 	public Samolot getSamolot() {
@@ -104,7 +120,7 @@ public class Lot {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param samolot
 	 */
 	public void setSamolot(Samolot samolot) {
@@ -116,7 +132,7 @@ public class Lot {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param wyposazenie
 	 */
 	public void setWyposazenie(float wyposazenie) {
@@ -128,23 +144,29 @@ public class Lot {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param piloci
 	 */
 	public void setPiloci(ArrayList<Pilot> piloci) {
 		this.piloci = piloci;
 	}
 
-	public ArrayList<PersonelPokladowy> getPersonelPok³adowy() {
+	public ArrayList<PersonelPokladowy> getPersonelPokladowy() {
 		return this.personelPokladowy;
 	}
 
 	/**
-	 * 
-	 * @param personelPok³adowy
+	 *
+	 * @param personelPokladowy
 	 */
-	public void setPersonelPok³adowy(ArrayList<PersonelPokladowy> personelPok³adowy) {
-		this.personelPokladowy = personelPok³adowy;
+	public void setPersonelPokladowy(ArrayList<PersonelPokladowy> personelPokladowy) {
+		this.personelPokladowy = personelPokladowy;
 	}
 
+	public int getCena() {
+		return cena;
+	}
+	public int getNastepneWolneMiejsce(){
+		return this.maxMiejsc - this.dostepnychMiejsc-- + 1;
+	}
 }

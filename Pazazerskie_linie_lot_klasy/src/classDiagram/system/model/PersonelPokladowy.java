@@ -1,20 +1,22 @@
 package classDiagram.system.model;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PersonelPokladowy extends Pracownik {
 
-	private ArrayList<Lot> lotyPrzypisane;
-
+	private HashMap<Integer, ArrayList<LocalDateTime>> godzinyPrzypisane;
 	/**
-	 * 
+	 *
 	 * @param c_id
 	 * @param c_imie
 	 * @param c_nazwisko
 	 */
 	public PersonelPokladowy(int c_id, String c_imie, String c_nazwisko) {
 		super(c_id,c_imie,c_nazwisko);
-		throw new UnsupportedOperationException();
 	}
 
 	public boolean mozeAutoryzowac() {
@@ -22,43 +24,42 @@ public class PersonelPokladowy extends Pracownik {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param lot
 	 */
 	public void przypiszDoLotu(Lot lot) {
-		// TODO - implement PersonelPokladowy.przypiszDoLotu
-		throw new UnsupportedOperationException();
+		addGodzinyPrzypisane(lot);
 	}
 
 	/**
-	 * 
-	 * @param godzWylot
-	 * @param godzPrzylot
+	 *
+	 * @param lot
 	 */
-	public boolean czyDostepny(String godzWylot, String godzPrzylot) {
-		// TODO - implement PersonelPokladowy.czyDostepny
-		throw new UnsupportedOperationException();
+	public boolean czyDostepny(Lot lot) {
+		for (Map.Entry<Integer, ArrayList<LocalDateTime>> entry : godzinyPrzypisane.entrySet()) {
+			if (!(lot.getDataWylot().isAfter(entry.getValue().get(0)) && lot.getDataPrzylot().isBefore(entry.getValue().get(1))))
+				return false;
+		}
+		return true;
 	}
 
 	/**
-	 * 
+	 *
 	 * @param lot
 	 */
 	public void usunPrzypisanieDoLotu(Lot lot) {
-		// TODO - implement PersonelPokladowy.usunPrzypisanieDoLotu
-		throw new UnsupportedOperationException();
+		this.godzinyPrzypisane.remove(lot.id);
 	}
 
-	public ArrayList<Lot> getLotyPrzypisane() {
-		return this.lotyPrzypisane;
+	public HashMap<Integer, ArrayList<LocalDateTime>> getLotyPrzypisane() {
+		return this.godzinyPrzypisane;
 	}
 
 	/**
-	 * 
-	 * @param lotyPrzypisane
+	 *
+	 * @param lot
 	 */
-	public void setLotyPrzypisane(ArrayList<Lot> lotyPrzypisane) {
-		this.lotyPrzypisane = lotyPrzypisane;
+	public void addGodzinyPrzypisane(Lot lot) {
+		this.godzinyPrzypisane.put(lot.id,(ArrayList<LocalDateTime>) Arrays.asList(lot.getDataWylot(), lot.getDataPrzylot()));
 	}
-
 }
