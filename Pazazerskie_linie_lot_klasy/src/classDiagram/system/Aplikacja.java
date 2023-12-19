@@ -143,6 +143,7 @@ public class Aplikacja {
 	 * @param bilet
 	 */
 	public boolean zwrotPieniedzy(Klient klient, Bilet bilet) {
+		klient.setSaldo(klient.getSaldo() + bilet.getCena());
 		return true;
 	}
 

@@ -178,4 +178,12 @@ public class Klient {
 	public int getId() {
 		return id;
 	}
+
+	public float getSaldo() {
+		return saldo;
+	}
+
+	public void setSaldo(float saldo) {
+		this.saldo = saldo;
+	}
 }
