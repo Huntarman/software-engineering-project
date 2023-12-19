@@ -78,9 +78,9 @@ public class Klient {
 	}
 
 	public boolean usunBilet(int idBilet) {
-		for (Bilet d : bilety) {
-			if (d.id == idBilet) {
-				bilety.remove(d);
+		for (int i = 0; i < bilety.size(); i++) {
+			if (bilety.get(i).getId() == idBilet){
+				bilety.remove(i);
 				return true;
 			}
 		}

@@ -71,6 +71,7 @@ public class Aplikacja {
 			else{
 				System.out.println("Bilet zostaje usuniety, klient nie posiada wymaganych srodków w saldzie");
 				bilety.remove(bilet.getId()-1);
+				klienci.get(bilet.getIdKlient()-1).usunBilet(bilet.getId());
 			}
 		}
 		else {
@@ -124,7 +125,7 @@ public class Aplikacja {
 			zwrotPieniedzy(klient, bilet);
 			loty.get(bilet.getIdLotu() - 1).zwrocMiejsce();
 			bilety.remove(bilet.getId()-1);
-			// klient.usunBilet(bilet.getId());
+			klient.usunBilet(bilet.getId());
 			System.out.println("Zwrot biletu zostal zatwierdzony");
 			return true;
 		}
