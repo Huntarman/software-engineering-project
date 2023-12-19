@@ -59,33 +59,38 @@ public class Aplikacja {
 	 * @param pracownik
 	 */
 	public void autoryzacjaSprzedazy(Bilet bilet, Pracownik pracownik) {
-		if (pracownik.mozeAutoryzowac()){
-			if (bilety.get(bilet.getId()-1).getAutoryzacja()){
-				System.out.println("Bilet zostal juz zautoryzowany");
-				return;
-			}
-			if (klienci.get(bilet.getIdKlient()-1).pobierzOplate(bilety.get(bilet.getId()-1))){
-				System.out.println("Bilet zostaje zatwierdzony");
-				bilety.get(bilet.getId()-1).setAutoryzacja(true);
-			}
-			else{
-				System.out.println("Bilet zostaje usuniety, klient nie posiada wymaganych srodków w saldzie");
-				loty.get(bilet.getIdLotu() - 1).zwrocMiejsce(bilet.getMiejsce());
-				bilety.remove(bilet.getId()-1);
-				klienci.get(bilet.getIdKlient()-1).usunBilet(bilet.getId());
-			}
+		if (!pracownik.mozeAutoryzowac()) {
+			System.out.println("Pracownik " + pracownik.getId() + " nie ma wymaganego poziomu dostepu");
+			return;
 		}
+
+		//if (pracownik.mozeAutoryzowac()){
+		if (bilety.get(bilet.getId()-1).getAutoryzacja()){
+			System.out.println("Bilet zostal juz zautoryzowany");
+			return;
+		}
+		if (klienci.get(bilet.getIdKlient()-1).pobierzOplate(bilety.get(bilet.getId()-1))){
+			System.out.println("Bilet zostaje zatwierdzony");
+			bilety.get(bilet.getId()-1).setAutoryzacja(true);
+		}
+		else{
+			System.out.println("Bilet zostaje usuniety, klient nie posiada wymaganych srodków w saldzie");
+			loty.get(bilet.getIdLotu() - 1).zwrocMiejsce(bilet.getMiejsce());
+			bilety.remove(bilet.getId()-1);
+			klienci.get(bilet.getIdKlient()-1).usunBilet(bilet.getId());
+		}
+		/*}
+
 		else {
-			System.out.println("Pracownik " + pracownik.getId() + " nie ma wymaganego poziomu dostepu");;
-		}
+			System.out.println("Pracownik " + pracownik.getId() + " nie ma wymaganego poziomu dostepu");
+		}*/
 	}
 
 	/**
 	 *
-	 * @param daneKlient
 	 * @param bilet
 	 */
-	public boolean zwrotBiletu(Klient daneKlient, Bilet bilet) {
+	public boolean zwrotBiletu(Bilet bilet) {
 		if (bilety.get(bilet.getId()-1).getAutoryzacja()){
 			if (bilety.get(bilet.getId()-1).getZwrot()){
 				System.out.println("\nBilet jest juz w trakcie zwrotu");
@@ -293,7 +298,7 @@ public class Aplikacja {
 		app.autoryzacjaSprzedazy(app.bilety.get(0),app.getPracownicy().get(2));
 		System.out.println("Pkt widzenia app: " + app.bilety.toString());
 		System.out.println("Pkt widzenia klient: " + app.klienci.get(0).getBilety().toString());
-		app.zwrotBiletu(app.klienci.get(0),app.klienci.get(0).getBilety().get(0));
+		app.zwrotBiletu(app.klienci.get(0).getBilety().get(0));
 		app.autoryzacjaSprzedazy(app.bilety.get(0),app.getPracownicy().get(0));
 		System.out.println("Pkt widzenia app: " + app.bilety.toString());
 		System.out.println("Pkt widzenia klient: " + app.klienci.get(0).getBilety().toString());
@@ -303,7 +308,7 @@ public class Aplikacja {
 
 		System.out.println("\nLot: " + app.loty.get(0).toString());
 
-		app.zwrotBiletu(app.klienci.get(0),app.klienci.get(0).getBilety().get(0));
+		app.zwrotBiletu(app.klienci.get(0).getBilety().get(0));
 		System.out.println("Pkt widzenia app: " + app.bilety.toString());
 		System.out.println("Pkt widzenia klient: " + app.klienci.get(0).getBilety().toString());
 
@@ -325,7 +330,7 @@ public class Aplikacja {
 
 		System.out.println("\nLot: " + app.loty.get(1).toString());
 
-		app.zwrotBiletu(app.klienci.get(1),app.klienci.get(1).getBilety().get(0));
+		app.zwrotBiletu(app.klienci.get(1).getBilety().get(0));
 		System.out.println("Pkt widzenia app: " + app.bilety.toString());
 		System.out.println("Pkt widzenia klient: " + app.klienci.get(1).getBilety().toString());
 
@@ -344,7 +349,7 @@ public class Aplikacja {
 
 		System.out.println("\nLot: " + app.loty.get(2).toString());
 
-		app.zwrotBiletu(app.klienci.get(0),app.klienci.get(0).getBilety().get(0));
+		app.zwrotBiletu(app.klienci.get(0).getBilety().get(0));
 		System.out.println("Pkt widzenia app: " + app.bilety.toString());
 		System.out.println("Pkt widzenia klient: " + app.klienci.get(0).getBilety().toString());
 		app.autoryzacjaZwrotu(app.pracownicy.get(0), app.klienci.get(0), app.klienci.get(0).getBilety().get(0));
