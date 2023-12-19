@@ -176,5 +176,10 @@ public class Klient {
 	 * @param bilety
 	 */
 	public void setBilety(ArrayList<Bilet> bilety) { this.bilety = bilety; }
-
+	public void addBilet(Bilet newBilet){
+		this.bilety.add(newBilet);
+	}
+	public int getId() {
+		return id;
+	}
 }

@@ -19,7 +19,12 @@ public class Pracownik {
 		System.out.print("\nStworzono pracownika ID: " + c_id + " Imie: " +
 				c_imie + " Nazwisko: " + c_nazwisko);
 	}
-
+	@Override
+	public String toString() {
+		String b = (mozeAutoryzowac()) ? "|| Ten pracownik ma wyzszy poziom dostepu":"";
+		return "\nID: " + this.id + " Imie: " + this.imie + " Nazwisko: " +
+				this.nazwisko + b;
+	}
 	public boolean mozeAutoryzowac() {
 		return true;
 	}

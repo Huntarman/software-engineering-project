@@ -3,6 +3,7 @@ package classDiagram.system;
 import classDiagram.system.model.*;
 
 import java.lang.reflect.Array;
+import java.security.PrivilegedActionException;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.ArrayList;
@@ -21,21 +22,33 @@ public class Aplikacja {
 
 	/**
 	 *
-	 * @param kryteriaWyszukiwania
+	 * @param miejsceWylot
+	 * @param miejscePrzylot
+	 * @param cenaMax
 	 */
-	public ArrayList<Lot> szukanieLotu(String[] kryteriaWyszukiwania) {
+	public ArrayList<Lot> szukanieLotu(String miejsceWylot, String miejscePrzylot, int cenaMax) {
 		ArrayList<Lot> loty_O_Kryteriach = new ArrayList<>();
 		return loty_O_Kryteriach;
 	}
 
 	/**
 	 *
-	 * @param kryteriaWyszukiwania
+	 * @param lot
 	 * @param klient
 	 */
-	public boolean kupnoBiletu(String[] kryteriaWyszukiwania, Klient klient) {
-		// TODO - implement Aplikacja.kupnoBiletu
-		throw new UnsupportedOperationException();
+	public boolean kupnoBiletu(Lot lot, Klient klient) {
+		Bilet newBilet = new Bilet(bilety.size()+1,
+									lot.getId(),
+									klient.getId(),
+									lot.getNastepneWolneMiejsce(),
+									lot.getDataWylot(),
+									lot.getDataPrzylot(),
+									lot.getMiejsceWylot(),
+									lot.getMiejscePrzylot(),
+									lot.getCena());
+		bilety.add(newBilet);
+		klient.addBilet(newBilet);
+		return true;
 	}
 
 	/**
@@ -87,7 +100,7 @@ public class Aplikacja {
 	 *
 	 * @param lot
 	 */
-	public void zarzadzanieWyposazeniemSamolotu(Lot lot) {
+	public void zarzadzanieWyposazeniemSamolotu(Lot lot, Pracownik pracownik) {
 		// TODO - implement Aplikacja.zarzadzanieWyposazeniemSamolotu
 		throw new UnsupportedOperationException();
 	}
@@ -96,10 +109,10 @@ public class Aplikacja {
 	 *
 	 * @param lot
 	 */
-	public boolean utworzenieLotu(Lot lot) {
-		// TODO - implement Aplikacja.utworzenieLotu
+	public boolean utworzenieLotu(Lot lot, Pracownik pracownik) {
+		if (!pracownik.mozeAutoryzowac()) return false;
+
 		return loty.add(lot);
-		//throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -107,9 +120,21 @@ public class Aplikacja {
 	 * @param idLot
 	 * @param idSamolot
 	 */
-	public boolean przypisanieSamolotu(int idLot, int idSamolot) {
-		// TODO - implement Aplikacja.przypisanieSamolotu
-		throw new UnsupportedOperationException();
+	public boolean przypisanieSamolotu(int idLot, int idSamolot, Pracownik pracownik) {
+		if (!pracownik.mozeAutoryzowac()){
+			System.out.println("Dany pracownik nie autoryzowac");
+			return false;
+		}
+		if (this.samoloty.get(idSamolot-1).getWyposazenie() < 0.5){
+			System.out.println("Niespelniony wymog wyposazenia");
+			return false;
+		}
+		if (this.samoloty.get(idSamolot - 1).czyDostepny(this.loty.get(idLot-1))){
+			this.samoloty.get(idSamolot-1).addGodzinyPrzypisane(this.loty.get(idLot-1));
+			this.loty.get(idLot-1).setSamolot(this.samoloty.get(idSamolot-1));
+			return true;
+		}
+		else return false;
 	}
 
 	public ArrayList<Klient> getKlienci() {
@@ -137,8 +162,7 @@ public class Aplikacja {
 	}
 
 	public ArrayList<Pracownik> getPracownicy() {
-		// TODO - implement Aplikacja.getPracownicy
-		throw new UnsupportedOperationException();
+		return pracownicy;
 	}
 
 	/**
@@ -146,19 +170,17 @@ public class Aplikacja {
 	 * @param pracownicy
 	 */
 	public void setPracownicy(ArrayList<Pracownik> pracownicy) {
-		// TODO - implement Aplikacja.setPracownicy
-		throw new UnsupportedOperationException();
+		this.pracownicy = pracownicy;
 	}
 
 	public ArrayList<Samolot> getSamoloty() {
-		// TODO - implement Aplikacja.getSamoloty
-		throw new UnsupportedOperationException();
+		return this.samoloty;
 	}
 
 	/**
 	 */
 	public void setSamoloty(ArrayList<Samolot> samoloty) {
-		// TODO - implement Aplikacja.setSamoloty
+		this.samoloty = samoloty;
 	}
 
 	/**
@@ -181,22 +203,26 @@ public class Aplikacja {
 		LocalDateTime date3 = LocalDateTime.of(2022, Month.DECEMBER,20,13,0);
 		LocalDateTime date4 = LocalDateTime.of(2022, Month.DECEMBER,20,16,30);
 
-		app.utworzenieLotu(new Lot(1,"Warszawa",date1,"Gdansk",date2,500,40));
-		// loty.add(new Lot(1,"Warszawa",date1,"Gdansk",date2,500,40));
-		app.utworzenieLotu(new Lot(2,"Warszawa",date3,"Wroclaw",date4,300,30));
-
 		pracownicy.add(new Pracownik(1,"Michal","Lazorko"));
 		pracownicy.add(new PersonelPokladowy(2, "Kuba", "Zajdel"));
 		pracownicy.add(new PersonelPokladowy(3, "Kichal", "Zalorko"));
 		pracownicy.add(new Pilot(4,"Muba","Kajdel"));
 
+		app.utworzenieLotu(new Lot(1,"Warszawa",date1,"Gdansk",date2,500,40), pracownicy.get(0));
+		app.utworzenieLotu(new Lot(2,"Warszawa",date3,"Wroclaw",date4,300,30), pracownicy.get(0));
+
 		samoloty.add(new Samolot(1, "LotoSam", 40));
 		samoloty.add(new Samolot(2, "SotoLam",30));
 
+		app.getLoty().get(0).setSamolot(samoloty.get(0));
+		app.getLoty().get(1).setSamolot(samoloty.get(1));
+
 		app.setKlienci(klienci);
-		System.out.print("\nKlienci: " + app.getKlienci().toString());
-		System.out.print("\nLoty: " + app.getLoty().toString());
+		System.out.println("\nKlienci: " + app.getKlienci().toString());
+		System.out.println("\nLoty: " + app.getLoty().toString());
 		app.setPracownicy(pracownicy);
 		app.setSamoloty(samoloty);
+		System.out.println("\nPracownicy: " + app.getPracownicy().toString());
+		System.out.println("\nSamoloty: " + app.getSamoloty().toString());
 	}
 }

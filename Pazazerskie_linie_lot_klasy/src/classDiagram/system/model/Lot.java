@@ -53,19 +53,16 @@ public class Lot {
 		this.miejscePrzylot = c_miejscePrzylot;
 		this.data_przylot = c_dataPrzylot;
 		this.cena = cena;
-		this.maxMiejsc = maxMiejsc;
-		this.dostepnychMiejsc = this.maxMiejsc;
 		System.out.print("\nStworzono lot ID: " + c_id + " Miejsce wylotu: " + c_miejsceWylot +
 				" Data wylotu: " + c_dataWylot + " Miejsce przylotu: " + c_miejscePrzylot +
-				" Data przylotu: " + c_dataPrzylot + " Cena: " + cena + " Maks. Liczba miejsc: " + maxMiejsc);
+				" Data przylotu: " + c_dataPrzylot + " Cena: " + cena + " Samolot: " + "Nie przypisany" +" Maks. Liczba miejsc: 0/0");
 	}
-
 	@Override
 	public String toString() {
 		return "\nID: " + id + " Miejsce wylotu: " + miejsceWylot +
 		" Data wylotu: " + data_wylot + " Miejsce przylotu: " + miejscePrzylot +
-		" Data przylotu: " + data_przylot + "\nCena: " + cena + " Maks. Liczba miejsc: " +
-		maxMiejsc + "\nPiloci: " + piloci.toString() + "\nPersonel pokladowy: " + personelPokladowy.toString();
+		" Data przylotu: " + data_przylot + "\nCena: " + cena + " Zajete miejsca: " +
+				(maxMiejsc - dostepnychMiejsc) + "/" + maxMiejsc + "\nPiloci: " + piloci.toString() + "\nPersonel pokladowy: " + personelPokladowy.toString();
 	}
 	public String getMiejsceWylot() {
 		return this.miejsceWylot;
@@ -128,6 +125,8 @@ public class Lot {
 	 * @param samolot
 	 */
 	public void setSamolot(Samolot samolot) {
+		this.maxMiejsc = samolot.getIloscMiejsc();
+		this.dostepnychMiejsc = this.maxMiejsc;
 		this.samolot = samolot;
 	}
 

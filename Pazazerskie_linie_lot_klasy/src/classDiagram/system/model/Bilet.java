@@ -6,6 +6,7 @@ public class Bilet {
 
 	protected int id;
 	private int idLotu;
+	private int idKlient;
 	private int miejsce;
 	private float cena;
 	private LocalDateTime data_wylot;
@@ -26,15 +27,24 @@ public class Bilet {
 	 * 
 	 * @param c_id
 	 * @param c_idLotu
+	 * @param c_idKlient
 	 * @param c_miejsce
 	 * @param c_cena
-	 *
+	 * @param data_wylot
+	 * @param data_przylot
+	 * @param miejscePrzylot
+	 * @param miejsceWylot
 	 */
-	public Bilet(int c_id, int c_idLotu,int c_miejsce, LocalDateTime data_wylot,LocalDateTime data_przylot,String miejsceWylot, String miejscePrzylot, float c_cena) {
+	public Bilet(int c_id, int c_idLotu, int c_idKlient, int c_miejsce, LocalDateTime data_wylot,LocalDateTime data_przylot,String miejsceWylot, String miejscePrzylot, float c_cena) {
 		this.id = c_id;
 		this.idLotu = c_idLotu;
 		this.miejsce = c_miejsce;
 		this.cena = c_cena;
+		this.idKlient = c_idKlient;
+		this.data_wylot = data_wylot;
+		this.data_przylot = data_przylot;
+		this.miejsceWylot = miejsceWylot;
+		this.miejscePrzylot = miejscePrzylot;
 	}
 
 	public void oznaczDoZwrotu() { this.zwrot = true; }
@@ -98,5 +108,25 @@ public class Bilet {
 
 	public void setZwrot(boolean zwrot) {
 		this.zwrot = zwrot;
+	}
+
+	public int getIdKlient() {
+		return idKlient;
+	}
+
+	public LocalDateTime getData_wylot() {
+		return data_wylot;
+	}
+
+	public LocalDateTime getData_przylot() {
+		return data_przylot;
+	}
+
+	public String getMiejscePrzylot() {
+		return miejscePrzylot;
+	}
+
+	public String getMiejsceWylot() {
+		return miejsceWylot;
 	}
 }

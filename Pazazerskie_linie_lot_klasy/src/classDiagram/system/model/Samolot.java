@@ -92,4 +92,11 @@ public class Samolot {
 		this.wyposazenie += nowe_wyposazenie;
 	}
 
+	public double getWyposazenie() {
+		return wyposazenie;
+	}
+	@Override
+	public String toString(){
+		return "ID: " + this.id + " Model: " + this.model + " Miejsca: " + (this.iloscMiejsc) ;
+	}
 }
