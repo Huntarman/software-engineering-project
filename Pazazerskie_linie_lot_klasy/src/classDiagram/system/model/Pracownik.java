@@ -13,8 +13,11 @@ public class Pracownik {
 	 * @param c_nazwisko
 	 */
 	public Pracownik(int c_id, String c_imie, String c_nazwisko) {
-		// TODO - implement Pracownik.Pracownik
-		throw new UnsupportedOperationException();
+		this.id = c_id;
+		imie = c_imie;
+		nazwisko = c_nazwisko;
+		System.out.print("\nStworzono pracownika ID: " + c_id + " Imie: " +
+				c_imie + " Nazwisko: " + c_nazwisko);
 	}
 
 	public boolean mozeAutoryzowac() {

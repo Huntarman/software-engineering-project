@@ -31,16 +31,10 @@ public class Lot {
 	 * @param cena
 	 */
 	public Lot(int c_id, String c_miejsceWylot, LocalDateTime c_dataWylot, String c_miejscePrzylot, LocalDateTime c_dataPrzylot, ArrayList<Pilot> c_piloci, ArrayList<PersonelPokladowy> c_personelPokladowy, int cena, int maxMiejsc) {
-		this.id = c_id;
-		this.miejsceWylot = c_miejsceWylot;
-		this.miejscePrzylot = c_miejscePrzylot;
-		this.data_przylot = c_dataPrzylot;
-		this.data_wylot = c_dataWylot;
+		this(c_id, c_miejsceWylot, c_dataWylot, c_miejscePrzylot, c_dataPrzylot, cena, maxMiejsc);
 		this.piloci = c_piloci;
 		this.personelPokladowy = c_personelPokladowy;
-		this.cena = cena;
-		this.maxMiejsc = maxMiejsc;
-		this.dostepnychMiejsc = this.maxMiejsc;
+		System.out.print(" Piloci: " + c_piloci.toString() + " Personel pokladowy: " + c_personelPokladowy.toString());
 	}
 
 	/**
@@ -61,6 +55,9 @@ public class Lot {
 		this.cena = cena;
 		this.maxMiejsc = maxMiejsc;
 		this.dostepnychMiejsc = this.maxMiejsc;
+		System.out.print("\nStworzono lot ID: " + c_id + " Miejsce wylotu: " + c_miejsceWylot +
+				" Data wylotu: " + c_dataWylot + " Miejsce przylotu: " + c_miejscePrzylot +
+				" Data przylotu: " + c_dataPrzylot + " Cena: " + cena + " Maks. Liczba miejsc: " + maxMiejsc);
 	}
 
 	public String getMiejsceWylot() {

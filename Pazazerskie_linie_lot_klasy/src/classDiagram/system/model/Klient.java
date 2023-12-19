@@ -36,6 +36,8 @@ public class Klient {
 		imie = c_imie;
 		nazwisko = c_nazwisko;
 		email = c_email;
+		System.out.print("\nStworzono klienta ID: " + c_id + " Imie: "
+				+ c_imie + " Nazwisko: " + c_nazwisko + " e-mail: " + c_email);
 		nr_telefonu = -1;
 		nr_kontaBank = -1;
 	}
@@ -49,11 +51,14 @@ public class Klient {
 	 * @param c_nr_telefonu
 	 * @param c_nr_kontaBank
 	 */
-	public Klient(int c_id, String c_imie, String c_nazwisko, String c_email, int c_nr_telefonu, int c_nr_kontaBank, int saldo) {
+	public Klient(int c_id, String c_imie, String c_nazwisko, String c_email,
+				  int c_nr_telefonu, int c_nr_kontaBank, int saldo) {
 		this(c_id, c_imie, c_nazwisko, c_email);
 		nr_telefonu = c_nr_telefonu;
 		nr_kontaBank = c_nr_kontaBank;
 		this.saldo = saldo;
+		System.out.print(" Nr. telefonu: " + c_nr_telefonu + " Nr. konta bankowego: "
+		+ c_nr_kontaBank + " Saldo: " + this.saldo);
 	}
 
 	public Bilet szukajBilet(int idBilet) {

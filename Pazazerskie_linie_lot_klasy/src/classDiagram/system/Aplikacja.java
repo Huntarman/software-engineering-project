@@ -121,13 +121,11 @@ public class Aplikacja {
 	 * @param klienci
 	 */
 	public void setKlienci(ArrayList<Klient> klienci) {
-		// TODO - implement Aplikacja.setKlienci
-		throw new UnsupportedOperationException();
+		this.klienci = klienci;
 	}
 
 	public ArrayList<Lot> getLoty() {
-		// TODO - implement Aplikacja.getLoty
-		throw new UnsupportedOperationException();
+		return this.loty;
 	}
 
 	/**
