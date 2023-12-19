@@ -4,8 +4,10 @@ import classDiagram.system.model.*;
 
 import java.lang.reflect.Array;
 import java.security.PrivilegedActionException;
+import java.sql.SQLOutput;
 import java.time.LocalDateTime;
 import java.time.Month;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 public class Aplikacja {
@@ -53,47 +55,89 @@ public class Aplikacja {
 
 	/**
 	 *
-	 * @param idKlient
-	 * @param idBilet
+	 * @param bilet
 	 * @param pracownik
 	 */
-	public void autoryzacjaSprzedazy(int idKlient, int idBilet, Pracownik pracownik) {
+	public void autoryzacjaSprzedazy(Bilet bilet, Pracownik pracownik) {
 		if (pracownik.mozeAutoryzowac()){
-			// TODO: 13.12.2023
+			if (bilety.get(bilet.getId()-1).getAutoryzacja()){
+				System.out.println("Bilet zostal juz zautoryzowany");
+				return;
+			}
+			if (klienci.get(bilet.getIdKlient()-1).pobierzOplate(bilety.get(bilet.getId()-1))){
+				System.out.println("Bilet zostaje zatwierdzony");
+				bilety.get(bilet.getId()-1).setAutoryzacja(true);
+			}
+			else{
+				System.out.println("Bilet zostaje usuniety, klient nie posiada wymaganych srodków w saldzie");
+				bilety.remove(bilet.getId()-1);
+			}
+		}
+		else {
+			System.out.println("Pracownik " + pracownik.getId() + " nie ma wymaganego poziomu dostepu");;
 		}
 	}
 
 	/**
 	 *
 	 * @param daneKlient
-	 * @param idBilet
+	 * @param bilet
 	 */
-	public boolean zwrotBiletu(Klient daneKlient, int idBilet) {
-		//daneKlient.getBilety().get(/// TODO: 13.12.2023 ).setZwrot(true);
-		return false;
+	public boolean zwrotBiletu(Klient daneKlient, Bilet bilet) {
+		if (bilety.get(bilet.getId()-1).getAutoryzacja()){
+			if (bilety.get(bilet.getId()-1).getZwrot()){
+				System.out.println("Bilet jest juz w trakcie zwrotu");
+				return false;
+			}
+			System.out.println("Bilet zostaje podany do zwrotu");
+			bilety.get(bilet.getId()-1).setZwrot(true);
+			return true;
+		}
+		else{
+			System.out.println("Bilet nie jest zautoryzowany");
+			return false;
+		}
 	}
 
 	/**
 	 *
 	 * @param pracownik
-	 * @param daneKlient
-	 * @param idBilet
+	 * @param klient
+	 * @param bilet
 	 */
-	public boolean autoryzacjaZwrotu(Pracownik pracownik, Klient daneKlient,int idBilet) {
-		if (pracownik.mozeAutoryzowac()){
-			// TODO: 13.12.2023
+	public boolean autoryzacjaZwrotu(Pracownik pracownik, Klient klient, Bilet bilet) {
+		if (!pracownik.mozeAutoryzowac()){
+			System.out.println("Dany pracownik nie autoryzowac");
+			return false;
 		}
-		throw new UnsupportedOperationException();
+		if(!bilety.get(bilet.getId()-1).getZwrot()){
+			System.out.println("Bilet nie jest w trakcie zwrotu");
+			return false;
+		}
+		if (LocalDateTime.now().isAfter(bilety.get(bilet.getId()-1).getData_wylot())){
+			System.out.println("Lot juz sie odbyl, nie mozna dokonac zwrotu");
+			return false;
+		}
+		long weeksBetween = ChronoUnit.WEEKS.between(LocalDateTime.now(), bilety.get(bilet.getId()-1).getData_wylot());
+		if (weeksBetween > 2){
+			zwrotPieniedzy(klient, bilet);
+			bilety.remove(bilet.getId()-1);
+			System.out.println("Zwrot biletu zostal zatwierdzony");
+			return true;
+		}
+		else {
+			System.out.println("Nie mozna zatwierdzic zwrotu. Do wylotu zostalo mniej niz 2 tygodnie");
+			return false;
+		}
 	}
 
 	/**
 	 *
 	 * @param klient
-	 * @param idBilet
+	 * @param bilet
 	 */
-	public boolean zwrotPieniedzy(Klient klient, int idBilet) {
-		// TODO - implement Aplikacja.zwrotPieniedzy
-		throw new UnsupportedOperationException();
+	public boolean zwrotPieniedzy(Klient klient, Bilet bilet) {
+		return true;
 	}
 
 	/**
@@ -224,5 +268,19 @@ public class Aplikacja {
 		app.setSamoloty(samoloty);
 		System.out.println("\nPracownicy: " + app.getPracownicy().toString());
 		System.out.println("\nSamoloty: " + app.getSamoloty().toString());
+
+		app.kupnoBiletu(app.loty.get(0),app.klienci.get(0));
+		System.out.println(app.bilety.toString());
+		app.autoryzacjaSprzedazy(app.bilety.get(0),app.getPracownicy().get(0));
+		System.out.println("Pkt widzenia app: " + app.bilety.toString());
+		System.out.println("Pkt widzenia klient: " + app.klienci.get(0).getBilety().toString());
+
+		app.zwrotBiletu(app.klienci.get(0),app.klienci.get(0).getBilety().get(0));
+		System.out.println("Pkt widzenia app: " + app.bilety.toString());
+		System.out.println("Pkt widzenia klient: " + app.klienci.get(0).getBilety().toString());
+
+		app.autoryzacjaZwrotu(app.pracownicy.get(0), app.klienci.get(0), app.klienci.get(0).getBilety().get(0));
+		System.out.println("Pkt widzenia app: " + app.bilety.toString());
+		System.out.println("Pkt widzenia klient: " + app.klienci.get(0).getBilety().toString());
 	}
 }

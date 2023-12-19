@@ -129,4 +129,13 @@ public class Bilet {
 	public String getMiejsceWylot() {
 		return miejsceWylot;
 	}
+
+	@Override
+	public String toString(){
+		String a = (this.autoryzacja) ? "Zautoryzowany":"Nie zautoryzowany";
+		String b = (this.zwrot) ? "||W trakcie Zwrotu":"";
+		return " ID biletu: " + this.id + " ID lotu: " + this.idLotu + " ID klienta: " + this.idKlient +
+				" Data wylotu: " + this.data_wylot + " Miejsce wylotu: " + this.miejsceWylot
+				+ " Data przylotu: " + this.data_przylot + " Miejsce przylotu: " + this.miejscePrzylot +" Status: "+ a + b ;
+	}
 }
