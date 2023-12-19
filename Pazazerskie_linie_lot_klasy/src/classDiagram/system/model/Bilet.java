@@ -47,7 +47,7 @@ public class Bilet {
 		this.miejsceWylot = miejsceWylot;
 		this.miejscePrzylot = miejscePrzylot;
 		System.out.print("\nStworzono bilet ID: " + c_id + " ID lotu: " + c_idLotu + " ID klienta: " + c_idKlient +
-				" Nr. miejsca: " + c_miejsce + " Cena: " + c_cena + " Data wylotu: " + data_wylot + " Miejsce wylotu" +
+				" Nr. miejsca: " + c_miejsce + " Cena: " + c_cena + " Data wylotu: " + data_wylot + " Miejsce wylotu: " +
 				miejsceWylot + " Data przylotu: " + data_przylot + " Miejsce przylotu: " + miejscePrzylot);
 	}
 
@@ -138,7 +138,7 @@ public class Bilet {
 	public String toString(){
 		String a = (this.autoryzacja) ? "Zautoryzowany":"Nie zautoryzowany";
 		String b = (this.zwrot) ? "||W trakcie Zwrotu":"";
-		return " ID biletu: " + this.id + " ID lotu: " + this.idLotu + " ID klienta: " + this.idKlient +
+		return "\nID biletu: " + this.id + " ID lotu: " + this.idLotu + " ID klienta: " + this.idKlient +
 				" Data wylotu: " + this.data_wylot + " Miejsce wylotu: " + this.miejsceWylot
 				+ " Data przylotu: " + this.data_przylot + " Miejsce przylotu: " + this.miejscePrzylot +" Status: "+ a + b ;
 	}

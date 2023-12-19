@@ -97,6 +97,6 @@ public class Samolot {
 	}
 	@Override
 	public String toString(){
-		return "ID: " + this.id + " Model: " + this.model + " Miejsca: " + (this.iloscMiejsc) ;
+		return "\nID: " + this.id + " Model: " + this.model + " Miejsca: " + (this.iloscMiejsc) ;
 	}
 }

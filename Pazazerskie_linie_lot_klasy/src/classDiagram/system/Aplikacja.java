@@ -86,15 +86,15 @@ public class Aplikacja {
 	public boolean zwrotBiletu(Klient daneKlient, Bilet bilet) {
 		if (bilety.get(bilet.getId()-1).getAutoryzacja()){
 			if (bilety.get(bilet.getId()-1).getZwrot()){
-				System.out.println("Bilet jest juz w trakcie zwrotu");
+				System.out.println("\nBilet jest juz w trakcie zwrotu");
 				return false;
 			}
-			System.out.println("Bilet zostaje podany do zwrotu");
+			System.out.println("\nBilet zostaje podany do zwrotu");
 			bilety.get(bilet.getId()-1).setZwrot(true);
 			return true;
 		}
 		else{
-			System.out.println("Bilet nie jest zautoryzowany");
+			System.out.println("\nBilet nie jest zautoryzowany");
 			return false;
 		}
 	}
@@ -116,6 +116,7 @@ public class Aplikacja {
 		}
 		if (LocalDateTime.now().isAfter(bilety.get(bilet.getId()-1).getData_wylot())){
 			System.out.println("Lot juz sie odbyl, nie mozna dokonac zwrotu");
+			bilet.setZwrot(false);
 			return false;
 		}
 		long weeksBetween = ChronoUnit.WEEKS.between(LocalDateTime.now(), bilety.get(bilet.getId()-1).getData_wylot());
@@ -123,11 +124,13 @@ public class Aplikacja {
 			zwrotPieniedzy(klient, bilet);
 			loty.get(bilet.getIdLotu() - 1).zwrocMiejsce();
 			bilety.remove(bilet.getId()-1);
+			// klient.usunBilet(bilet.getId());
 			System.out.println("Zwrot biletu zostal zatwierdzony");
 			return true;
 		}
 		else {
 			System.out.println("Nie mozna zatwierdzic zwrotu. Do wylotu zostalo mniej niz 2 tygodnie");
+			bilet.setZwrot(false);
 			return false;
 		}
 	}
@@ -243,10 +246,10 @@ public class Aplikacja {
 		klienci.add(new Klient(1, "Michal", "Zajdel", "miczaj@gmail.com", 999929999,3213421,600));
 		klienci.add(new Klient(2, "Kuba", "Lazorko", "kublaz@gmail.com", 119121911,1243123,400));
 
-		LocalDateTime date1 = LocalDateTime.of(2022, Month.DECEMBER,20,12,30);
-		LocalDateTime date2 = LocalDateTime.of(2022, Month.DECEMBER,20,19,0);
-		LocalDateTime date3 = LocalDateTime.of(2022, Month.DECEMBER,20,13,0);
-		LocalDateTime date4 = LocalDateTime.of(2022, Month.DECEMBER,20,16,30);
+		LocalDateTime date1 = LocalDateTime.of(2024, Month.JANUARY,20,12,30);
+		LocalDateTime date2 = LocalDateTime.of(2024, Month.JANUARY,20,19,0);
+		LocalDateTime date3 = LocalDateTime.of(2023, Month.DECEMBER,20,13,0);
+		LocalDateTime date4 = LocalDateTime.of(2023, Month.DECEMBER,20,16,30);
 
 		pracownicy.add(new Pracownik(1,"Michal","Lazorko"));
 		pracownicy.add(new PersonelPokladowy(2, "Kuba", "Zajdel"));
@@ -267,7 +270,7 @@ public class Aplikacja {
 		app.getLoty().get(1).setSamolot(samoloty.get(1));
 
 		app.setKlienci(klienci);
-		System.out.println("\nKlienci: " + app.getKlienci().toString());
+		System.out.println("\n\nKlienci: " + app.getKlienci().toString());
 		System.out.println("\nLoty: " + app.getLoty().toString());
 		app.setPracownicy(pracownicy);
 		app.setSamoloty(samoloty);
@@ -275,12 +278,12 @@ public class Aplikacja {
 		System.out.println("\nSamoloty: " + app.getSamoloty().toString());
 
 		app.kupnoBiletu(app.loty.get(0),app.klienci.get(0));
-		System.out.println(app.bilety.toString());
+		System.out.println("\n" + app.bilety.toString());
 		app.autoryzacjaSprzedazy(app.bilety.get(0),app.getPracownicy().get(0));
 		System.out.println("Pkt widzenia app: " + app.bilety.toString());
 		System.out.println("Pkt widzenia klient: " + app.klienci.get(0).getBilety().toString());
 
-		System.out.println("\nLoty: " + app.getLoty().toString());
+		System.out.println("\nLot: " + app.loty.get(0).toString());
 
 		app.zwrotBiletu(app.klienci.get(0),app.klienci.get(0).getBilety().get(0));
 		System.out.println("Pkt widzenia app: " + app.bilety.toString());
@@ -290,6 +293,38 @@ public class Aplikacja {
 		System.out.println("Pkt widzenia app: " + app.bilety.toString());
 		System.out.println("Pkt widzenia klient: " + app.klienci.get(0).getBilety().toString());
 
-		System.out.println("\nLoty: " + app.getLoty().toString());
+		System.out.println("\nLot: " + app.loty.get(0).toString());
+
+		/////
+		app.kupnoBiletu(app.loty.get(1),app.klienci.get(1));
+		System.out.println("\n" + app.bilety.toString());
+		app.autoryzacjaSprzedazy(app.bilety.get(0),app.getPracownicy().get(0));
+		System.out.println("Pkt widzenia app: " + app.bilety.toString());
+		System.out.println("Pkt widzenia klient: " + app.klienci.get(1).getBilety().toString());
+
+		System.out.println("\nLot: " + app.loty.get(1).toString());
+		//
+
+		app.zwrotBiletu(app.klienci.get(1),app.klienci.get(1).getBilety().get(0));
+		System.out.println("Pkt widzenia app: " + app.bilety.toString());
+		System.out.println("Pkt widzenia klient: " + app.klienci.get(1).getBilety().toString());
+
+		app.autoryzacjaZwrotu(app.pracownicy.get(0), app.klienci.get(1), app.klienci.get(1).getBilety().get(0));
+		System.out.println("Pkt widzenia app: " + app.bilety.toString());
+		System.out.println("Pkt widzenia klient: " + app.klienci.get(1).getBilety().toString());
+
+		System.out.println("\nLot: " + app.loty.get(1).toString());
+
+		/////
+
+		System.out.println("\nLot: " + app.loty.get(0).toString());
+		app.kupnoBiletu(app.loty.get(0),app.klienci.get(1));
+		System.out.println("\n" + app.bilety.toString());
+		app.autoryzacjaSprzedazy(app.bilety.get(1),app.getPracownicy().get(0));
+		System.out.println("Pkt widzenia app: " + app.bilety.toString());
+		System.out.println("Pkt widzenia klient: " + app.klienci.get(1).getBilety().toString());
+
+		System.out.println("\nLot: " + app.loty.get(0).toString());
+		//
 	}
 }
