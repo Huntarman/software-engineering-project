@@ -186,4 +186,5 @@ public class Lot {
 	public int getNastepneWolneMiejsce(){
 		return this.maxMiejsc - this.dostepnychMiejsc-- + 1;
 	}
+	public void zwrocMiejsce() {this.dostepnychMiejsc++;}
 }

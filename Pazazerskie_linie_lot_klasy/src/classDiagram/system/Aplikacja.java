@@ -121,6 +121,7 @@ public class Aplikacja {
 		long weeksBetween = ChronoUnit.WEEKS.between(LocalDateTime.now(), bilety.get(bilet.getId()-1).getData_wylot());
 		if (weeksBetween > 2){
 			zwrotPieniedzy(klient, bilet);
+			loty.get(bilet.getIdLotu() - 1).zwrocMiejsce();
 			bilety.remove(bilet.getId()-1);
 			System.out.println("Zwrot biletu zostal zatwierdzony");
 			return true;
@@ -288,5 +289,7 @@ public class Aplikacja {
 		app.autoryzacjaZwrotu(app.pracownicy.get(0), app.klienci.get(0), app.klienci.get(0).getBilety().get(0));
 		System.out.println("Pkt widzenia app: " + app.bilety.toString());
 		System.out.println("Pkt widzenia klient: " + app.klienci.get(0).getBilety().toString());
+
+		System.out.println("\nLoty: " + app.getLoty().toString());
 	}
 }
