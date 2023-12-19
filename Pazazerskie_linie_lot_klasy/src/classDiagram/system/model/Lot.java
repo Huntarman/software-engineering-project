@@ -198,5 +198,5 @@ public class Lot {
 		}
 		return -1;
 	}
-	public void zwrocMiejsce(int numerMiejsca) {this.zajeteMiejsca[numerMiejsca-1] = false;}
+	public void zwrocMiejsce(int numerMiejsca) {this.zajeteMiejsca[numerMiejsca-1] = false; dostepnychMiejsc++;}
 }
