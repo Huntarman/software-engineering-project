@@ -60,7 +60,13 @@ public class Klient {
 		System.out.print(" Nr. telefonu: " + c_nr_telefonu + " Nr. konta bankowego: "
 		+ c_nr_kontaBank + " Saldo: " + this.saldo);
 	}
-
+	@Override
+	public String toString() {
+		return "\nID: " + this.id + " Imie: " + this.imie + " Nazwisko: " +
+				this.nazwisko + " e-mail: " + this.email + " Nr. telefonu: " +
+				this.nr_telefonu + " Nr. konta bankowego: "
+				+ this.nr_kontaBank + " Saldo: " + this.saldo;
+	}
 	public Bilet szukajBilet(int idBilet) {
 		for (Bilet c : bilety) {
 			if (c.id == idBilet) {

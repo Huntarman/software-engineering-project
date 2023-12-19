@@ -94,11 +94,12 @@ public class Aplikacja {
 
 	/**
 	 *
-	 * @param daneLotu
+	 * @param lot
 	 */
-	public Lot utworzenieLotu(String[] daneLotu) {
+	public boolean utworzenieLotu(Lot lot) {
 		// TODO - implement Aplikacja.utworzenieLotu
-		throw new UnsupportedOperationException();
+		return loty.add(lot);
+		//throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -112,8 +113,7 @@ public class Aplikacja {
 	}
 
 	public ArrayList<Klient> getKlienci() {
-		// TODO - implement Aplikacja.getKlienci
-		throw new UnsupportedOperationException();
+		return this.klienci;
 	}
 
 	/**
@@ -133,8 +133,7 @@ public class Aplikacja {
 	 * @param loty
 	 */
 	public void setLoty(ArrayList<Lot> loty) {
-		// TODO - implement Aplikacja.setLoty
-		throw new UnsupportedOperationException();
+		this.loty = loty;
 	}
 
 	public ArrayList<Pracownik> getPracownicy() {
@@ -181,8 +180,10 @@ public class Aplikacja {
 		LocalDateTime date2 = LocalDateTime.of(2022, Month.DECEMBER,20,19,0);
 		LocalDateTime date3 = LocalDateTime.of(2022, Month.DECEMBER,20,13,0);
 		LocalDateTime date4 = LocalDateTime.of(2022, Month.DECEMBER,20,16,30);
-		loty.add(new Lot(1,"Warszawa",date1,"Gdansk",date2,500,40));
-		loty.add(new Lot(2,"Warszawa",date3,"Wroclaw",date4,300,30));
+
+		app.utworzenieLotu(new Lot(1,"Warszawa",date1,"Gdansk",date2,500,40));
+		// loty.add(new Lot(1,"Warszawa",date1,"Gdansk",date2,500,40));
+		app.utworzenieLotu(new Lot(2,"Warszawa",date3,"Wroclaw",date4,300,30));
 
 		pracownicy.add(new Pracownik(1,"Michal","Lazorko"));
 		pracownicy.add(new PersonelPokladowy(2, "Kuba", "Zajdel"));
@@ -193,9 +194,9 @@ public class Aplikacja {
 		samoloty.add(new Samolot(2, "SotoLam",30));
 
 		app.setKlienci(klienci);
-		app.setLoty(loty);
+		System.out.print("\nKlienci: " + app.getKlienci().toString());
+		System.out.print("\nLoty: " + app.getLoty().toString());
 		app.setPracownicy(pracownicy);
 		app.setSamoloty(samoloty);
 	}
-
 }

@@ -60,6 +60,13 @@ public class Lot {
 				" Data przylotu: " + c_dataPrzylot + " Cena: " + cena + " Maks. Liczba miejsc: " + maxMiejsc);
 	}
 
+	@Override
+	public String toString() {
+		return "\nID: " + id + " Miejsce wylotu: " + miejsceWylot +
+		" Data wylotu: " + data_wylot + " Miejsce przylotu: " + miejscePrzylot +
+		" Data przylotu: " + data_przylot + "\nCena: " + cena + " Maks. Liczba miejsc: " +
+		maxMiejsc + "\nPiloci: " + piloci.toString() + "\nPersonel pokladowy: " + personelPokladowy.toString();
+	}
 	public String getMiejsceWylot() {
 		return this.miejsceWylot;
 	}
