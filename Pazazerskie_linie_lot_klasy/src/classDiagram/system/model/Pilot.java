@@ -10,7 +10,9 @@ public class Pilot extends Pracownik {
 
 	private HashMap<Integer, ArrayList<LocalDateTime>> godzinyPrzypisane;
 
-
+	public Pilot() {
+		super();
+	}
 	/**
 	 * 
 	 * @param c_id
@@ -19,7 +21,11 @@ public class Pilot extends Pracownik {
 	 */
 	public Pilot(int c_id, String c_imie, String c_nazwisko) {
 		super(c_id,c_imie,c_nazwisko);
+	}
 
+	@Override
+	public String toString() {
+		return super.toString();
 	}
 
 	public boolean mozeAutoryzowac() {

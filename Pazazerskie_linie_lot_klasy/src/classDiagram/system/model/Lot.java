@@ -34,7 +34,12 @@ public class Lot {
 		this(c_id, c_miejsceWylot, c_dataWylot, c_miejscePrzylot, c_dataPrzylot, cena, maxMiejsc);
 		this.piloci = c_piloci;
 		this.personelPokladowy = c_personelPokladowy;
-		System.out.print(" Piloci: " + c_piloci.toString() + " Personel pokladowy: " + c_personelPokladowy.toString());
+		System.out.print(" Piloci: ");
+		for (Pilot p : c_piloci)
+			System.out.print(p.toString());
+		System.out.print(" Personel pokladowy: ");
+		for (PersonelPokladowy p : c_personelPokladowy)
+			System.out.print(p.toString());
 	}
 
 	/**
@@ -59,10 +64,19 @@ public class Lot {
 	}
 	@Override
 	public String toString() {
-		return "\nID: " + id + " Miejsce wylotu: " + miejsceWylot +
-		" Data wylotu: " + data_wylot + " Miejsce przylotu: " + miejscePrzylot +
-		" Data przylotu: " + data_przylot + "\nCena: " + cena + " Zajete miejsca: " +
-				(maxMiejsc - dostepnychMiejsc) + "/" + maxMiejsc + "\nPiloci: " + piloci.toString() + "\nPersonel pokladowy: " + personelPokladowy.toString();
+		String s = "\nID: " + id + " Miejsce wylotu: " + miejsceWylot +
+				" Data wylotu: " + data_wylot + " Miejsce przylotu: " + miejscePrzylot +
+				" Data przylotu: " + data_przylot + " Samolot " + samolot.getModel() + "\nCena: " + cena + " Zajete miejsca: " +
+				(maxMiejsc - dostepnychMiejsc) + "/" + maxMiejsc + "\nPiloci: ";
+
+		for (Pilot p : piloci) {
+			s += p.toString();
+		}
+		s += "\nPersonel pokladowy: ";
+		for (PersonelPokladowy p : personelPokladowy) {
+			s += p.toString();
+		}
+		return s;
 	}
 	public String getMiejsceWylot() {
 		return this.miejsceWylot;

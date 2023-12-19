@@ -6,6 +6,9 @@ public class Pracownik {
 	protected String imie;
 	protected String nazwisko;
 
+	public Pracownik() {
+		id = -1;
+	};
 	/**
 	 * 
 	 * @param c_id

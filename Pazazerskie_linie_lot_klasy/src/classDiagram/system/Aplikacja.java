@@ -259,6 +259,10 @@ public class Aplikacja {
 		samoloty.add(new Samolot(2, "SotoLam",30));
 
 		app.getLoty().get(0).setSamolot(samoloty.get(0));
+		Pilot p = (Pilot) pracownicy.get(3);
+		ArrayList<Pilot> alp = app.getLoty().get(0).getPiloci();
+		alp.add(p);
+		app.getLoty().get(0).setPiloci(alp);
 		app.getLoty().get(1).setSamolot(samoloty.get(1));
 
 		app.setKlienci(klienci);
@@ -274,6 +278,8 @@ public class Aplikacja {
 		app.autoryzacjaSprzedazy(app.bilety.get(0),app.getPracownicy().get(0));
 		System.out.println("Pkt widzenia app: " + app.bilety.toString());
 		System.out.println("Pkt widzenia klient: " + app.klienci.get(0).getBilety().toString());
+
+		System.out.println("\nLoty: " + app.getLoty().toString());
 
 		app.zwrotBiletu(app.klienci.get(0),app.klienci.get(0).getBilety().get(0));
 		System.out.println("Pkt widzenia app: " + app.bilety.toString());
