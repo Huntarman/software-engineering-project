@@ -18,6 +18,7 @@ public class Lot {
 
 	private int maxMiejsc;
 	private int dostepnychMiejsc;
+	private boolean[] zajeteMiejsca;
 
 	/**
 	 *
@@ -30,7 +31,9 @@ public class Lot {
 	 * @param c_personelPokladowy
 	 * @param cena
 	 */
-	public Lot(int c_id, String c_miejsceWylot, LocalDateTime c_dataWylot, String c_miejscePrzylot, LocalDateTime c_dataPrzylot, ArrayList<Pilot> c_piloci, ArrayList<PersonelPokladowy> c_personelPokladowy, int cena, int maxMiejsc) {
+	public Lot(int c_id, String c_miejsceWylot, LocalDateTime c_dataWylot, String c_miejscePrzylot,
+			   LocalDateTime c_dataPrzylot, ArrayList<Pilot> c_piloci, ArrayList<PersonelPokladowy> c_personelPokladowy,
+			   int cena, int maxMiejsc) {
 		this(c_id, c_miejsceWylot, c_dataWylot, c_miejscePrzylot, c_dataPrzylot, cena, maxMiejsc);
 		this.piloci = c_piloci;
 		this.personelPokladowy = c_personelPokladowy;
@@ -51,7 +54,8 @@ public class Lot {
 	 * @param c_dataPrzylot
 	 * @param cena
 	 */
-	public Lot(int c_id, String c_miejsceWylot, LocalDateTime c_dataWylot, String c_miejscePrzylot, LocalDateTime c_dataPrzylot, int cena, int maxMiejsc) {
+	public Lot(int c_id, String c_miejsceWylot, LocalDateTime c_dataWylot, String c_miejscePrzylot,
+			   LocalDateTime c_dataPrzylot, int cena, int maxMiejsc) {
 		this.id = c_id;
 		this.miejsceWylot = c_miejsceWylot;
 		this.data_wylot = c_dataWylot;
@@ -141,6 +145,7 @@ public class Lot {
 	public void setSamolot(Samolot samolot) {
 		this.maxMiejsc = samolot.getIloscMiejsc();
 		this.dostepnychMiejsc = this.maxMiejsc;
+		this.zajeteMiejsca = new boolean[this.maxMiejsc];
 		this.samolot = samolot;
 	}
 
@@ -184,7 +189,14 @@ public class Lot {
 		return cena;
 	}
 	public int getNastepneWolneMiejsce(){
-		return this.maxMiejsc - this.dostepnychMiejsc-- + 1;
+		this.dostepnychMiejsc--;
+		for (int i = 0; i < zajeteMiejsca.length; i++) {
+			if(!zajeteMiejsca[i]){
+				zajeteMiejsca[i] = true;
+				return i+1;
+			}
+		}
+		return -1;
 	}
-	public void zwrocMiejsce() {this.dostepnychMiejsc++;}
+	public void zwrocMiejsce(int numerMiejsca) {this.zajeteMiejsca[numerMiejsca-1] = false;}
 }

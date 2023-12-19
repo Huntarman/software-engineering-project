@@ -123,7 +123,7 @@ public class Aplikacja {
 		long weeksBetween = ChronoUnit.WEEKS.between(LocalDateTime.now(), bilety.get(bilet.getId()-1).getData_wylot());
 		if (weeksBetween > 2){
 			zwrotPieniedzy(klient, bilet);
-			loty.get(bilet.getIdLotu() - 1).zwrocMiejsce();
+			loty.get(bilet.getIdLotu() - 1).zwrocMiejsce(bilet.getMiejsce());
 			bilety.remove(bilet.getId()-1);
 			klient.usunBilet(bilet.getId());
 			System.out.println("Zwrot biletu zostal zatwierdzony");
