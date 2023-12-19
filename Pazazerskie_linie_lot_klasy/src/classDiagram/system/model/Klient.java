@@ -88,10 +88,6 @@ public class Klient {
 		return false;
 	}
 
-	/*public boolean dodajBilet(Bilet bilet) {
-		return bilety.add(bilet);
-	}*/
-
 	public boolean printBilet(Bilet bilet) {
 		System.out.println("Bilet ID: " + bilet.id + " " +
 				"\nklienta: " + this.imie + " " + this.nazwisko +

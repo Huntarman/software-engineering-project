@@ -149,6 +149,7 @@ public class Aplikacja {
 	/**
 	 *
 	 * @param lot
+	 * @param pracownik
 	 */
 	public void zarzadzanieWyposazeniemSamolotu(Lot lot, Pracownik pracownik) {
 		// TODO - implement Aplikacja.zarzadzanieWyposazeniemSamolotu
@@ -158,6 +159,7 @@ public class Aplikacja {
 	/**
 	 *
 	 * @param lot
+	 * @param pracownik
 	 */
 	public boolean utworzenieLotu(Lot lot, Pracownik pracownik) {
 		if (!pracownik.mozeAutoryzowac()) return false;
@@ -169,6 +171,7 @@ public class Aplikacja {
 	 *
 	 * @param idLot
 	 * @param idSamolot
+	 * @param pracownik
 	 */
 	public boolean przypisanieSamolotu(int idLot, int idSamolot, Pracownik pracownik) {
 		if (!pracownik.mozeAutoryzowac()){

@@ -88,6 +88,10 @@ public class Samolot {
 		this.godzinyPrzypisane.put(lot.id,(ArrayList<LocalDateTime>)Arrays.asList(lot.getDataWylot(),lot.getDataPrzylot()));
 	}
 
+	/**
+	 *
+	 * @param nowe_wyposazenie
+	 */
 	public void dodajWyposazenie(double nowe_wyposazenie){
 		this.wyposazenie += nowe_wyposazenie;
 	}
