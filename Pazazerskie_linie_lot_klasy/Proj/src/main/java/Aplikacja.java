@@ -244,7 +244,7 @@ public class Aplikacja {
 
 	public static void main(String[] args) {
 		Aplikacja app = new Aplikacja();
-		ArrayList<Klient> klienci = new ArrayList<>();
+		/*ArrayList<Klient> klienci = new ArrayList<>();
 		ArrayList<Lot> loty = new ArrayList<>();
 		ArrayList<Pracownik> pracownicy = new ArrayList<>();
 		ArrayList<Samolot> samoloty = new ArrayList<>();
@@ -285,8 +285,10 @@ public class Aplikacja {
 		app.setPracownicy(pracownicy);
 		app.setSamoloty(samoloty);
 		System.out.println("\nPracownicy: " + app.getPracownicy().toString());
-		System.out.println("\nSamoloty: " + app.getSamoloty().toString());
+		System.out.println("\nSamoloty: " + app.getSamoloty().toString());*/
 
+		Dane dane = new Dane();
+		dane.wypelnijDane(app);
 		////
 		app.kupnoBiletu(app.loty.get(0),app.klienci.get(0));
 		System.out.println("\n" + app.bilety.toString());
