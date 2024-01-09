@@ -9,6 +9,9 @@ import javax.imageio.stream.ImageInputStream;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+// -javaagent:"C:/Program Files/Java/jmockit.1.49.jar"
+// C:\Users\kubal\.m2\repository\org\jmockit\jmockit\1.49\jmockit-1.49.jar
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class AplikacjaTest {
