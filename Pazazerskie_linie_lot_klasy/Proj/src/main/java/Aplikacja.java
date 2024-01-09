@@ -53,26 +53,28 @@ public class Aplikacja {
 	 * @param bilet
 	 * @param pracownik
 	 */
-	public void autoryzacjaSprzedazy(Bilet bilet, Pracownik pracownik) {
+	public boolean autoryzacjaSprzedazy(Bilet bilet, Pracownik pracownik) {
 		if (!pracownik.mozeAutoryzowac()) {
 			System.out.println("Pracownik " + pracownik.getId() + " nie ma wymaganego poziomu dostepu");
-			return;
+			return false;
 		}
 
 		//if (pracownik.mozeAutoryzowac()){
 		if (bilety.get(bilet.getId()-1).getAutoryzacja()){
 			System.out.println("Bilet zostal juz zautoryzowany");
-			return;
+			return false;
 		}
 		if (klienci.get(bilet.getIdKlient()-1).pobierzOplate(bilety.get(bilet.getId()-1))){
 			System.out.println("Bilet zostaje zatwierdzony");
 			bilety.get(bilet.getId()-1).setAutoryzacja(true);
+			return true;
 		}
 		else{
 			System.out.println("Bilet zostaje usuniety, klient nie posiada wymaganych srodków w saldzie");
 			loty.get(bilet.getIdLotu() - 1).zwrocMiejsce(bilet.getMiejsce());
 			bilety.remove(bilet.getId()-1);
 			klienci.get(bilet.getIdKlient()-1).usunBilet(bilet.getId());
+			return false;
 		}
 		/*}
 

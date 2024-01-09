@@ -6,7 +6,10 @@ import java.util.ArrayList;
 
 public class Dane {
     public Dane(){}
-
+    public Klient daneKlient[] = new Klient[]{
+            new Klient(1, "Michal", "Zajdel", "miczaj@gmail.com", 999929999,3213421,600),
+            new Klient(),
+            new Klient() };
     public static void wypelnijDane(Aplikacja app){
         ArrayList<Klient> klienci = new ArrayList<>();
         ArrayList<Lot> loty = new ArrayList<>();
