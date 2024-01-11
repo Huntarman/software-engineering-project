@@ -1,3 +1,5 @@
+package Dane;
+
 import model.*;
 
 import java.time.LocalDateTime;
@@ -83,6 +85,9 @@ public class Dane {
         app.setKlienci(klienci);
         app.setPracownicy(pracownicy);
         app.setSamoloty(samoloty);
+
+    }
+    public void fillClient(Klient klient){
 
     }
 }

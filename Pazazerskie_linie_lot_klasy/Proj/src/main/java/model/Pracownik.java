@@ -19,8 +19,8 @@ public class Pracownik {
 		this.id = c_id;
 		imie = c_imie;
 		nazwisko = c_nazwisko;
-		System.out.print("\nStworzono pracownika ID: " + c_id + " Imie: " +
-				c_imie + " Nazwisko: " + c_nazwisko);
+		//System.out.print("\nStworzono pracownika ID: " + c_id + " Imie: " +
+		//		c_imie + " Nazwisko: " + c_nazwisko);
 	}
 	@Override
 	public String toString() {

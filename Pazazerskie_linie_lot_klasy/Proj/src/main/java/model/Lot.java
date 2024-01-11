@@ -64,9 +64,9 @@ public class Lot {
 		this.cena = cena;
 		this.maxMiejsc = maxMiejsc;
 		this.zajeteMiejsca = new boolean[this.maxMiejsc];
-		System.out.print("\nStworzono lot ID: " + c_id + " Miejsce wylotu: " + c_miejsceWylot +
-				" Data wylotu: " + c_dataWylot + " Miejsce przylotu: " + c_miejscePrzylot +
-				" Data przylotu: " + c_dataPrzylot + " Cena: " + cena + " Samolot: " + "Nie przypisany" +" Maks. Liczba miejsc: 0/0");
+		//System.out.print("\nStworzono lot ID: " + c_id + " Miejsce wylotu: " + c_miejsceWylot +
+		//		" Data wylotu: " + c_dataWylot + " Miejsce przylotu: " + c_miejscePrzylot +
+		//		" Data przylotu: " + c_dataPrzylot + " Cena: " + cena + " Samolot: " + "Nie przypisany" +" Maks. Liczba miejsc: 0/0");
 	}
 	@Override
 	public String toString() {

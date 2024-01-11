@@ -21,8 +21,8 @@ public class Samolot {
 		this.model = c_model;
 		this.iloscMiejsc = c_iloscMiejsc;
 		this.wyposazenie = 1.0;
-		System.out.print("\nStworzono samolot ID: " + c_id + " Model: " + c_model +
-				" Ilosc miejsc: " + c_iloscMiejsc);
+		//System.out.print("\nStworzono samolot ID: " + c_id + " Model: " + c_model +
+		//		" Ilosc miejsc: " + c_iloscMiejsc);
 	}
 
 	/**

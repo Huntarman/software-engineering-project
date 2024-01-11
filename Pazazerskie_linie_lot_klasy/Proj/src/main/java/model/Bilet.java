@@ -46,9 +46,9 @@ public class Bilet {
 		this.data_przylot = data_przylot;
 		this.miejsceWylot = miejsceWylot;
 		this.miejscePrzylot = miejscePrzylot;
-		System.out.print("\nStworzono bilet ID: " + c_id + " ID lotu: " + c_idLotu + " ID klienta: " + c_idKlient +
-				" Nr. miejsca: " + c_miejsce + " Cena: " + c_cena + " Data wylotu: " + data_wylot + " Miejsce wylotu: " +
-				miejsceWylot + " Data przylotu: " + data_przylot + " Miejsce przylotu: " + miejscePrzylot);
+		//System.out.print("\nStworzono bilet ID: " + c_id + " ID lotu: " + c_idLotu + " ID klienta: " + c_idKlient +
+		//		" Nr. miejsca: " + c_miejsce + " Cena: " + c_cena + " Data wylotu: " + data_wylot + " Miejsce wylotu: " +
+		//		miejsceWylot + " Data przylotu: " + data_przylot + " Miejsce przylotu: " + miejscePrzylot);
 	}
 
 	public void oznaczDoZwrotu() { this.zwrot = true; }

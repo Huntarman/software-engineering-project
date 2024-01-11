@@ -1,13 +1,5 @@
-import model.Bilet;
-import model.Klient;
-import model.Lot;
-import model.Pracownik;
-import org.junit.jupiter.api.Order;
+import Dane.Dane;
 import org.junit.jupiter.api.Test;
-
-import javax.imageio.stream.ImageInputStream;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 // -javaagent:"C:/Program Files/Java/jmockit.1.49.jar"
 // C:\Users\kubal\.m2\repository\org\jmockit\jmockit\1.49\jmockit-1.49.jar
