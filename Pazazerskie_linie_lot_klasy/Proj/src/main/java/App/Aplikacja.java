@@ -1,7 +1,10 @@
+package App;
+
 import Dane.Dane;
 import model.*;
 
 import java.time.LocalDateTime;
+import java.time.Month;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
@@ -56,13 +59,13 @@ public class Aplikacja {
 	public boolean autoryzacjaSprzedazy(Bilet bilet, Pracownik pracownik) {
 		if (!pracownik.mozeAutoryzowac()) {
 			System.out.println("Pracownik " + pracownik.getId() + " nie ma wymaganego poziomu dostepu");
-			return false;
+			throw new RuntimeException("Pracownik " + pracownik.getId() + " nie ma wymaganego poziomu dostepu");
 		}
 
 		//if (pracownik.mozeAutoryzowac()){
 		if (bilety.get(bilet.getId()-1).getAutoryzacja()){
 			System.out.println("Bilet zostal juz zautoryzowany");
-			return false;
+			throw new RuntimeException("Bilet zostal juz zautoryzowany");
 		}
 		if (klienci.get(bilet.getIdKlient()-1).pobierzOplate(bilety.get(bilet.getId()-1))){
 			System.out.println("Bilet zostaje zatwierdzony");
@@ -74,7 +77,7 @@ public class Aplikacja {
 			loty.get(bilet.getIdLotu() - 1).zwrocMiejsce(bilet.getMiejsce());
 			bilety.remove(bilet.getId()-1);
 			klienci.get(bilet.getIdKlient()-1).usunBilet(bilet.getId());
-			return false;
+			throw new RuntimeException("Bilet zostaje usuniety, klient nie posiada wymaganych srodków w saldzie");
 		}
 		/*}
 
@@ -111,17 +114,17 @@ public class Aplikacja {
 	 */
 	public boolean autoryzacjaZwrotu(Pracownik pracownik, Klient klient, Bilet bilet) {
 		if (!pracownik.mozeAutoryzowac()){
-			System.out.println("Dany pracownik nie autoryzowac");
-			return false;
+			System.out.println("Dany pracownik nie moze autoryzowac");
+			throw new RuntimeException("Dany pracownik nie moze autoryzowac");
 		}
 		if(!bilety.get(bilet.getId()-1).getZwrot()){
 			System.out.println("Bilet nie jest w trakcie zwrotu");
-			return false;
+			throw new RuntimeException("Bilet nie jest w trakcie zwrotu");
 		}
 		if (LocalDateTime.now().isAfter(bilety.get(bilet.getId()-1).getData_wylot())){
 			System.out.println("Lot juz sie odbyl, nie mozna dokonac zwrotu");
 			bilet.setZwrot(false);
-			return false;
+			throw new RuntimeException("Lot juz sie odbyl, nie mozna dokonac zwrotu");
 		}
 		long weeksBetween = ChronoUnit.WEEKS.between(LocalDateTime.now(), bilety.get(bilet.getId()-1).getData_wylot());
 		if (weeksBetween > 2){
@@ -135,7 +138,7 @@ public class Aplikacja {
 		else {
 			System.out.println("Nie mozna zatwierdzic zwrotu. Do wylotu zostalo mniej niz 2 tygodnie");
 			bilet.setZwrot(false);
-			return false;
+			throw new RuntimeException("Nie mozna zatwierdzic zwrotu. Do wylotu zostalo mniej niz 2 tygodnie");
 		}
 	}
 
@@ -178,12 +181,12 @@ public class Aplikacja {
 	 */
 	public boolean przypisanieSamolotu(int idLot, int idSamolot, Pracownik pracownik) {
 		if (!pracownik.mozeAutoryzowac()){
-			System.out.println("Dany pracownik nie autoryzowac");
-			return false;
+			System.out.println("Dany pracownik nie moze przypisywac samolotu");
+			throw new RuntimeException("Dany pracownik nie moze przypisywac samolotu");
 		}
 		if (this.samoloty.get(idSamolot-1).getWyposazenie() < 0.5){
 			System.out.println("Niespelniony wymog wyposazenia");
-			return false;
+			throw new RuntimeException("Niespelniony wymog wyposazenia");
 		}
 		if (this.samoloty.get(idSamolot - 1).czyDostepny(this.loty.get(idLot-1))){
 			this.samoloty.get(idSamolot-1).addGodzinyPrzypisane(this.loty.get(idLot-1));
@@ -239,6 +242,10 @@ public class Aplikacja {
 		this.samoloty = samoloty;
 	}
 
+	public ArrayList<Bilet> getBilety() {
+		return bilety;
+	}
+
 	/**
 	 * 
 	 * @param args
@@ -246,7 +253,7 @@ public class Aplikacja {
 
 	public static void main(String[] args) {
 		Aplikacja app = new Aplikacja();
-		/*ArrayList<Klient> klienci = new ArrayList<>();
+		ArrayList<Klient> klienci = new ArrayList<>();
 		ArrayList<Lot> loty = new ArrayList<>();
 		ArrayList<Pracownik> pracownicy = new ArrayList<>();
 		ArrayList<Samolot> samoloty = new ArrayList<>();
@@ -287,10 +294,8 @@ public class Aplikacja {
 		app.setPracownicy(pracownicy);
 		app.setSamoloty(samoloty);
 		System.out.println("\nPracownicy: " + app.getPracownicy().toString());
-		System.out.println("\nSamoloty: " + app.getSamoloty().toString());*/
+		System.out.println("\nSamoloty: " + app.getSamoloty().toString());
 
-		Dane dane = new Dane();
-		dane.wypelnijDane(app);
 		////
 		app.kupnoBiletu(app.loty.get(0),app.klienci.get(0));
 		System.out.println("\n" + app.bilety.toString());

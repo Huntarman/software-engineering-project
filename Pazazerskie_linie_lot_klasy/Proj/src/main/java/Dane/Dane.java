@@ -1,5 +1,6 @@
 package Dane;
 
+import App.Aplikacja;
 import model.*;
 
 import java.time.LocalDateTime;
@@ -54,13 +55,18 @@ public class Dane {
 
         klienci.add(new Klient(1, "Michal", "Zajdel", "miczaj@gmail.com", 999929999,3213421,600));
         klienci.add(new Klient(2, "Kuba", "Lazorko", "kublaz@gmail.com", 119121911,1243123,400));
-
+        klienci.add(new Klient(3, "Kuba", "Lazorko", "kublaz@gmail.com", 222222222,1232133,100));
+        klienci.add(new Klient(4, "Kuba", "Lazorko", "kublaz@gmail.com", 444444444,12424312,10000));
         LocalDateTime date1 = LocalDateTime.of(2024, Month.JANUARY,20,12,30);
         LocalDateTime date2 = LocalDateTime.of(2024, Month.JANUARY,20,19,0);
         LocalDateTime date3 = LocalDateTime.of(2023, Month.DECEMBER,20,13,0);
         LocalDateTime date4 = LocalDateTime.of(2023, Month.DECEMBER,20,16,30);
         LocalDateTime date5 = LocalDateTime.of(2022, Month.DECEMBER,20,13,0);
         LocalDateTime date6 = LocalDateTime.of(2022, Month.DECEMBER,20,16,30);
+        LocalDateTime date7 = LocalDateTime.of(2024, Month.JULY,22,17,0);
+        LocalDateTime date8 = LocalDateTime.of(2024, Month.JULY,22,19,30);
+        LocalDateTime date9 = LocalDateTime.of(2024, Month.JULY,22,20,0);
+        LocalDateTime date10 = LocalDateTime.of(2024, Month.JULY,22,23,30);
 
         pracownicy.add(new Pracownik(1,"Michal","Lazorko"));
         pracownicy.add(new PersonelPokladowy(2, "Kuba", "Zajdel"));
@@ -70,9 +76,14 @@ public class Dane {
         app.utworzenieLotu(new Lot(1,"Warszawa",date1,"Gdansk",date2,500,40), pracownicy.get(0));
         app.utworzenieLotu(new Lot(2,"Warszawa",date3,"Wroclaw",date4,300,30), pracownicy.get(0));
         app.utworzenieLotu(new Lot(3,"Warszawa",date5,"Wroclaw",date6,10,35), pracownicy.get(0));
+        app.utworzenieLotu(new Lot(4,"Walbrzych",date7,"Radom",date8,400,50), pracownicy.get(0));
+        app.utworzenieLotu(new Lot(5,"Sosnowiec",date9,"Grzegorzow",date10,25,100), pracownicy.get(0));
 
         samoloty.add(new Samolot(1, "LotoSam", 40));
         samoloty.add(new Samolot(2, "SotoLam",30));
+        samoloty.add(new Samolot(3, "TEstoLot",30));
+
+
 
         app.getLoty().get(0).setSamolot(samoloty.get(0));
         Pilot p = (Pilot) pracownicy.get(3);
@@ -86,8 +97,54 @@ public class Dane {
         app.setPracownicy(pracownicy);
         app.setSamoloty(samoloty);
 
-    }
-    public void fillClient(Klient klient){
+        app.przypisanieSamolotu(5,3,pracownicy.get(0));
+        app.getSamoloty().get(2).setWyposazenie(0.4);
 
+        app.kupnoBiletu(app.getLoty().get(0), app.getKlienci().get(0));
+        app.kupnoBiletu(app.getLoty().get(1), app.getKlienci().get(1));
+        app.kupnoBiletu(app.getLoty().get(2), app.getKlienci().get(0));
+        app.kupnoBiletu(app.getLoty().get(0), app.getKlienci().get(1));
+
+        app.autoryzacjaSprzedazy(app.getBilety().get(0), app.getPracownicy().get(0));
+        /*app.zwrotBiletu(app.getKlienci().get(0).getBilety().get(0));
+        app.zwrotBiletu(app.getKlienci().get(0).getBilety().get(0));
+        app.zwrotBiletu(app.getKlienci().get(1).getBilety().get(0));
+        app.zwrotBiletu(app.getKlienci().get(0).getBilety().get(0));*/
+    }
+    public void fillSamolot(Samolot samolot){
+        LocalDateTime date1 = LocalDateTime.of(2024, Month.JANUARY,20,12,30);
+        LocalDateTime date2 = LocalDateTime.of(2024, Month.JANUARY,20,19,0);
+        LocalDateTime date3 = LocalDateTime.of(2024, Month.JANUARY,21,13,0);
+        LocalDateTime date4 = LocalDateTime.of(2024, Month.JANUARY,21,16,30);
+        LocalDateTime date5 = LocalDateTime.of(2024, Month.JANUARY,22,13,0);
+        LocalDateTime date6 = LocalDateTime.of(2024, Month.JANUARY,22,16,30);
+        LocalDateTime date7 = LocalDateTime.of(2024, Month.JANUARY,22,17,0);
+        LocalDateTime date8 = LocalDateTime.of(2024, Month.JANUARY,22,19,30);
+        LocalDateTime date9 = LocalDateTime.of(2024, Month.JANUARY,22,20,0);
+        LocalDateTime date10 = LocalDateTime.of(2024, Month.JANUARY,22,23,30);
+        samolot.przypiszDoLotu(new Lot(1,"Warszawa",date1,"Gdansk",date2,500, samolot.getIloscMiejsc()));
+        samolot.przypiszDoLotu(new Lot(2,"Gdansk",date3,"Katowice",date4,600,samolot.getIloscMiejsc()));
+        samolot.przypiszDoLotu(new Lot(3,"Terespol",date5,"Zakopane",date6,300,samolot.getIloscMiejsc()));
+        samolot.przypiszDoLotu(new Lot(4,"Walbrzych",date7,"Radom",date8,400,samolot.getIloscMiejsc()));
+        samolot.przypiszDoLotu(new Lot(5,"Sosnowiec",date9,"Grzegorzow",date10,25,samolot.getIloscMiejsc()));
+    }
+
+    public void fillKlient(Klient klient){
+        LocalDateTime date1 = LocalDateTime.of(2024, Month.JANUARY,20,12,30);
+        LocalDateTime date2 = LocalDateTime.of(2024, Month.JANUARY,20,19,0);
+        LocalDateTime date3 = LocalDateTime.of(2024, Month.JANUARY,21,13,0);
+        LocalDateTime date4 = LocalDateTime.of(2024, Month.JANUARY,21,16,30);
+        LocalDateTime date5 = LocalDateTime.of(2024, Month.JANUARY,22,13,0);
+        LocalDateTime date6 = LocalDateTime.of(2024, Month.JANUARY,22,16,30);
+        LocalDateTime date7 = LocalDateTime.of(2024, Month.JANUARY,22,17,0);
+        LocalDateTime date8 = LocalDateTime.of(2024, Month.JANUARY,22,19,30);
+        LocalDateTime date9 = LocalDateTime.of(2024, Month.JANUARY,22,20,0);
+        LocalDateTime date10 = LocalDateTime.of(2024, Month.JANUARY,22,23,30);
+        klient.setSaldo(500.0f);
+        klient.addBilet(new Bilet(1, 1, klient.getId(), 1, date1, date2, "Warszawa", "Gdansk", 500, true));
+        klient.addBilet(new Bilet(2, 2, klient.getId(), 1, date3, date4, "Gdansk", "Katowice", 600, true));
+        klient.addBilet(new Bilet(3, 3, klient.getId(), 1, date5, date6, "Terespol", "Zakopane", 300, true));
+        klient.addBilet(new Bilet(4, 4, klient.getId(), 1, date7, date8, "Walbrzych", "Radom", 400, true));
+        klient.addBilet(new Bilet(5, 5, klient.getId(), 1, date9, date10, "Sosnowiec", "Grzegorzow", 25, true));
     }
 }

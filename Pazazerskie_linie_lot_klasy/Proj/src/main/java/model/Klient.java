@@ -82,8 +82,7 @@ public class Klient {
 				return true;
 			}
 		}
-
-		return false;
+		throw new RuntimeException("Usuniecie biletu nie powiodlo sie; Bilet nie istnieje");
 	}
 
 	public boolean printBilet(Bilet bilet) {
@@ -98,10 +97,9 @@ public class Klient {
 	public boolean pobierzOplate(Bilet bilet) {
 		if (this.saldo >= bilet.getCena()) {
 			this.saldo -= bilet.getCena();
-			// TODO: INNE?
 			return true;
 		}
-		return false;
+		throw new RuntimeException("Klient nie ma odpowiednich srodkow na koncie");
 	}
 
 	public String getImie() {

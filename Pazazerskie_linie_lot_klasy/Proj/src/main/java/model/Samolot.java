@@ -8,7 +8,7 @@ public class Samolot {
 	protected int id;
 	private String model;
 	private int iloscMiejsc;
-	private HashMap<Integer, ArrayList<LocalDateTime>> godzinyPrzypisane;
+	private HashMap<Integer, ArrayList<LocalDateTime>> godzinyPrzypisane = new HashMap<>();
 	private double wyposazenie;
 
 	/**
@@ -28,17 +28,25 @@ public class Samolot {
 	/**
 	 * @param lot
 	 */
-	public void przypiszDoLotu(Lot lot) {
-		addGodzinyPrzypisane(lot);
+	public boolean przypiszDoLotu(Lot lot) {
+		if (czyDostepny(lot)) {
+			addGodzinyPrzypisane(lot);
+			//System.out.println("Sukces");
+			return true;
+		}
+		System.out.println("!!!!!!");
+		return false;
 	}
 
 	/**
 	 * @param lot
 	 */
-	public boolean czyDostepny(Lot lot) {
+	public boolean czyDostepny(Lot lot) throws RuntimeException{
+
 		for (Map.Entry<Integer, ArrayList<LocalDateTime>> entry : godzinyPrzypisane.entrySet()) {
-			if (!(lot.getDataWylot().isAfter(entry.getValue().get(0)) && lot.getDataPrzylot().isBefore(entry.getValue().get(1))))
-				return false;
+			if (!(lot.getDataWylot().isAfter(entry.getValue().get(1)) || lot.getDataPrzylot().isBefore(entry.getValue().get(0)))) {
+				throw new RuntimeException("Samolot nie moze zostac przypisany do lotu");
+			}
 		}
 		return true;
 	}
@@ -85,7 +93,10 @@ public class Samolot {
 	 * @param lot
 	 */
 	public void addGodzinyPrzypisane(Lot lot) {
-		this.godzinyPrzypisane.put(lot.id,(ArrayList<LocalDateTime>)Arrays.asList(lot.getDataWylot(),lot.getDataPrzylot()));
+		ArrayList<LocalDateTime> godziny = new ArrayList<>();
+		godziny.add(lot.getDataWylot());
+		godziny.add(lot.getDataPrzylot());
+		this.godzinyPrzypisane.put(lot.id,godziny);
 	}
 
 	/**
@@ -103,4 +114,9 @@ public class Samolot {
 	public String toString(){
 		return "\nID: " + this.id + " Model: " + this.model + " Miejsca: " + (this.iloscMiejsc) ;
 	}
+
+	public void setWyposazenie(double wyposazenie) {
+		this.wyposazenie = wyposazenie;
+	}
 }
+

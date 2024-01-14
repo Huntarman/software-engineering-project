@@ -50,6 +50,24 @@ public class Bilet {
 		//		" Nr. miejsca: " + c_miejsce + " Cena: " + c_cena + " Data wylotu: " + data_wylot + " Miejsce wylotu: " +
 		//		miejsceWylot + " Data przylotu: " + data_przylot + " Miejsce przylotu: " + miejscePrzylot);
 	}
+	public Bilet(int c_id, int c_idLotu, int c_idKlient, int c_miejsce,
+				 LocalDateTime data_wylot, LocalDateTime data_przylot,
+				 String miejsceWylot, String miejscePrzylot, float c_cena,
+					boolean test) {
+		this.id = c_id;
+		this.idLotu = c_idLotu;
+		this.miejsce = c_miejsce;
+		this.cena = c_cena;
+		this.idKlient = c_idKlient;
+		this.data_wylot = data_wylot;
+		this.data_przylot = data_przylot;
+		this.miejsceWylot = miejsceWylot;
+		this.miejscePrzylot = miejscePrzylot;
+		this.autoryzacja = test;
+		//System.out.print("\nStworzono bilet ID: " + c_id + " ID lotu: " + c_idLotu + " ID klienta: " + c_idKlient +
+		//		" Nr. miejsca: " + c_miejsce + " Cena: " + c_cena + " Data wylotu: " + data_wylot + " Miejsce wylotu: " +
+		//		miejsceWylot + " Data przylotu: " + data_przylot + " Miejsce przylotu: " + miejscePrzylot);
+	}
 
 	public void oznaczDoZwrotu() { this.zwrot = true; }
 
