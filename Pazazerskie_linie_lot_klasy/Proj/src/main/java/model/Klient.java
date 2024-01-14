@@ -82,6 +82,7 @@ public class Klient {
 				return true;
 			}
 		}
+		System.out.println("Usuniecie biletu nie powiodlo sie; Bilet nie istnieje");
 		throw new RuntimeException("Usuniecie biletu nie powiodlo sie; Bilet nie istnieje");
 	}
 
@@ -99,6 +100,7 @@ public class Klient {
 			this.saldo -= bilet.getCena();
 			return true;
 		}
+		System.out.println("Klient nie ma odpowiednich srodkow na koncie");
 		throw new RuntimeException("Klient nie ma odpowiednich srodkow na koncie");
 	}
 

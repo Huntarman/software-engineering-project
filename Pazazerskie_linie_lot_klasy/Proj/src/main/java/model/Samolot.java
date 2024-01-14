@@ -45,9 +45,11 @@ public class Samolot {
 
 		for (Map.Entry<Integer, ArrayList<LocalDateTime>> entry : godzinyPrzypisane.entrySet()) {
 			if (!(lot.getDataWylot().isAfter(entry.getValue().get(1)) || lot.getDataPrzylot().isBefore(entry.getValue().get(0)))) {
+				System.out.println("Samolot nie moze zostac przypisany do lotu");
 				throw new RuntimeException("Samolot nie moze zostac przypisany do lotu");
 			}
 		}
+		//System.out.println("Przypisano samolot");
 		return true;
 	}
 

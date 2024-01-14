@@ -65,7 +65,7 @@ public class Dane {
         LocalDateTime date6 = LocalDateTime.of(2022, Month.DECEMBER,20,16,30);
         LocalDateTime date7 = LocalDateTime.of(2024, Month.JULY,22,17,0);
         LocalDateTime date8 = LocalDateTime.of(2024, Month.JULY,22,19,30);
-        LocalDateTime date9 = LocalDateTime.of(2024, Month.JULY,22,20,0);
+        LocalDateTime date9 = LocalDateTime.of(2024, Month.JULY,22,18,0);
         LocalDateTime date10 = LocalDateTime.of(2024, Month.JULY,22,23,30);
 
         pracownicy.add(new Pracownik(1,"Michal","Lazorko"));
@@ -75,7 +75,7 @@ public class Dane {
 
         app.utworzenieLotu(new Lot(1,"Warszawa",date1,"Gdansk",date2,500,40), pracownicy.get(0));
         app.utworzenieLotu(new Lot(2,"Warszawa",date3,"Wroclaw",date4,300,30), pracownicy.get(0));
-        app.utworzenieLotu(new Lot(3,"Warszawa",date5,"Wroclaw",date6,10,35), pracownicy.get(0));
+        app.utworzenieLotu(new Lot(3,"Warszawa",date5,"Wroclaw",date6,100,35), pracownicy.get(0));
         app.utworzenieLotu(new Lot(4,"Walbrzych",date7,"Radom",date8,400,50), pracownicy.get(0));
         app.utworzenieLotu(new Lot(5,"Sosnowiec",date9,"Grzegorzow",date10,25,100), pracownicy.get(0));
 
@@ -83,33 +83,25 @@ public class Dane {
         samoloty.add(new Samolot(2, "SotoLam",30));
         samoloty.add(new Samolot(3, "TEstoLot",30));
 
-
-
-        app.getLoty().get(0).setSamolot(samoloty.get(0));
-        Pilot p = (Pilot) pracownicy.get(3);
-        ArrayList<Pilot> alp = app.getLoty().get(0).getPiloci();
-        alp.add(p);
-        app.getLoty().get(0).setPiloci(alp);
-        app.getLoty().get(1).setSamolot(samoloty.get(1));
-        app.getLoty().get(2).setSamolot(samoloty.get(0));
-
         app.setKlienci(klienci);
         app.setPracownicy(pracownicy);
         app.setSamoloty(samoloty);
 
-        app.przypisanieSamolotu(5,3,pracownicy.get(0));
+        app.przypisanieSamolotu(4,1,pracownicy.get(0));
         app.getSamoloty().get(2).setWyposazenie(0.4);
 
-        app.kupnoBiletu(app.getLoty().get(0), app.getKlienci().get(0));
-        app.kupnoBiletu(app.getLoty().get(1), app.getKlienci().get(1));
-        app.kupnoBiletu(app.getLoty().get(2), app.getKlienci().get(0));
+        app.kupnoBiletu(app.getLoty().get(0), app.getKlienci().get(3));
+        app.kupnoBiletu(app.getLoty().get(1), app.getKlienci().get(3));
+        app.kupnoBiletu(app.getLoty().get(3), app.getKlienci().get(3));
+        app.kupnoBiletu(app.getLoty().get(4), app.getKlienci().get(3));
         app.kupnoBiletu(app.getLoty().get(0), app.getKlienci().get(1));
+        app.kupnoBiletu(app.getLoty().get(3), app.getKlienci().get(0));
 
         app.autoryzacjaSprzedazy(app.getBilety().get(0), app.getPracownicy().get(0));
-        /*app.zwrotBiletu(app.getKlienci().get(0).getBilety().get(0));
-        app.zwrotBiletu(app.getKlienci().get(0).getBilety().get(0));
-        app.zwrotBiletu(app.getKlienci().get(1).getBilety().get(0));
-        app.zwrotBiletu(app.getKlienci().get(0).getBilety().get(0));*/
+        app.autoryzacjaSprzedazy(app.getBilety().get(1), app.getPracownicy().get(0));
+        app.autoryzacjaSprzedazy(app.getBilety().get(2), app.getPracownicy().get(0));
+        app.autoryzacjaSprzedazy(app.getBilety().get(3), app.getPracownicy().get(0));
+
     }
     public void fillSamolot(Samolot samolot){
         LocalDateTime date1 = LocalDateTime.of(2024, Month.JANUARY,20,12,30);

@@ -67,23 +67,20 @@ public class Aplikacja {
 			System.out.println("Bilet zostal juz zautoryzowany");
 			throw new RuntimeException("Bilet zostal juz zautoryzowany");
 		}
-		if (klienci.get(bilet.getIdKlient()-1).pobierzOplate(bilety.get(bilet.getId()-1))){
-			System.out.println("Bilet zostaje zatwierdzony");
-			bilety.get(bilet.getId()-1).setAutoryzacja(true);
-			return true;
-		}
-		else{
+		try {
+			if (klienci.get(bilet.getIdKlient()-1).pobierzOplate(bilety.get(bilet.getId()-1))){
+				//System.out.println("Bilet zostaje zatwierdzony");
+				bilety.get(bilet.getId()-1).setAutoryzacja(true);
+				return true;
+			}
+		}catch (RuntimeException e){
 			System.out.println("Bilet zostaje usuniety, klient nie posiada wymaganych srodków w saldzie");
 			loty.get(bilet.getIdLotu() - 1).zwrocMiejsce(bilet.getMiejsce());
 			bilety.remove(bilet.getId()-1);
 			klienci.get(bilet.getIdKlient()-1).usunBilet(bilet.getId());
 			throw new RuntimeException("Bilet zostaje usuniety, klient nie posiada wymaganych srodków w saldzie");
 		}
-		/*}
-
-		else {
-			System.out.println("Pracownik " + pracownik.getId() + " nie ma wymaganego poziomu dostepu");
-		}*/
+		return false;
 	}
 
 	/**
@@ -93,15 +90,15 @@ public class Aplikacja {
 	public boolean zwrotBiletu(Bilet bilet) {
 		if (bilety.get(bilet.getId()-1).getAutoryzacja()){
 			if (bilety.get(bilet.getId()-1).getZwrot()){
-				System.out.println("\nBilet jest juz w trakcie zwrotu");
+				//System.out.println("\nBilet jest juz w trakcie zwrotu");
 				return false;
 			}
-			System.out.println("\nBilet zostaje podany do zwrotu");
+			//System.out.println("\nBilet zostaje podany do zwrotu");
 			bilety.get(bilet.getId()-1).setZwrot(true);
 			return true;
 		}
 		else{
-			System.out.println("\nBilet nie jest zautoryzowany");
+			//System.out.println("\nBilet nie jest zautoryzowany");
 			return false;
 		}
 	}
