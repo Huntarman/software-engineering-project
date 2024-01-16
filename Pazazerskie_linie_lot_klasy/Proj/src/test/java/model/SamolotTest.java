@@ -19,6 +19,7 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@Tag("Samolot")
 class SamolotTest implements TestExecutionExceptionHandler {
 
     static Samolot samolot;
@@ -66,6 +67,7 @@ class SamolotTest implements TestExecutionExceptionHandler {
     @ParameterizedTest
     @MethodSource("data")
     @ExtendWith(SamolotTest.class)
+    @Tag("Przypis")
     void przypiszDoLotuSukces(Lot lot) {
         assertTrue(samolot.przypiszDoLotu(lot));
     }
@@ -73,6 +75,7 @@ class SamolotTest implements TestExecutionExceptionHandler {
     @ParameterizedTest
     @MethodSource("dataFalse")
     @ExtendWith(SamolotTest.class)
+    @Tag("Przypis")
     void przypiszDoLotuPorazka(Lot lot) {
         assertFalse(samolot.przypiszDoLotu(lot));
     }

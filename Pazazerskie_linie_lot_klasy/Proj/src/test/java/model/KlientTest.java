@@ -2,6 +2,7 @@ package model;
 
 import Dane.Dane;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.extension.ExtensionContext;
@@ -17,7 +18,7 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.*;
 //import org.junit.jupiter
 
-
+@Tag("Klient")
 class KlientTest implements TestExecutionExceptionHandler {
 
     static Klient klient;
@@ -37,6 +38,7 @@ class KlientTest implements TestExecutionExceptionHandler {
     @ParameterizedTest
     @CsvSource({"1","2","3","4","5"})
     @ExtendWith(KlientTest.class)
+    @Tag("Bilet")
     void usunBiletTrue(int Bilet_id) {
        assertTrue(klient.usunBilet(Bilet_id));
     }
@@ -44,6 +46,7 @@ class KlientTest implements TestExecutionExceptionHandler {
     @ParameterizedTest
     @MethodSource("dataDeleteFalse")
     @ExtendWith(KlientTest.class)
+    @Tag("Bilet")
     void usunBiletFalse(int Bilet_id) {
         assertFalse(klient.usunBilet(Bilet_id));
     }
