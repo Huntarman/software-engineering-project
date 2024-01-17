@@ -6,5 +6,5 @@ import org.junit.platform.suite.api.Suite;
 
 @Suite
 @SelectPackages({"model", "App"})
-@ExcludeClassNamePatterns({"^.*TestMocked?$"})
+// @ExcludeClassNamePatterns({"^.*TestMocked?$"})
 public class AllTestsSuite { }

@@ -54,7 +54,7 @@ public class AplikacjaTestMocked implements TestExecutionExceptionHandler {
         new Expectations() {
             {
                 prac.mozeAutoryzowac(); result = true;
-                prac.getId(); result = 1;
+                // prac.getId(); result = 1;
 
                 lot.getId(); result = 1;
                 lot.getCena(); result = 100;
@@ -66,6 +66,7 @@ public class AplikacjaTestMocked implements TestExecutionExceptionHandler {
                 klient.getSaldo(); result = 500.0f;
                 klient.getId(); result = 1;
                 apka.getBilety().size(); result = 1;
+
                 // apka.getBilety().get(0).getAutoryzacja(); result = true;
             }
         };
@@ -75,20 +76,17 @@ public class AplikacjaTestMocked implements TestExecutionExceptionHandler {
         System.out.println(prac.getId());
         System.out.println("Lot");
         System.out.println(lot.getId());
-        System.out.println(lot.getCena());
+        */System.out.println(lot.getCena());/*
         System.out.println(lot.getNastepneWolneMiejsce());
         System.out.println("Klient");
-        System.out.println(klient.getId());
+        System.out.println(klient.getId()); */
         System.out.println(klient.getSaldo());
-        System.out.println("Apka");
-        System.out.println(apka.getBilety().size());
-*/
+        //System.out.println("Apka");
+        //System.out.println(apka.getBilety().size());
+
         apka.setLoty(new ArrayList<>(Arrays.asList(lot)));
         apka.setKlienci(new ArrayList<>(Arrays.asList(klient)));
-        apka.kupnoBiletu(apka.getLoty().get(0), apka.getKlienci().get(0));//lot, klient);
-
-        System.out.println(apka.getBilety().get(0).getId());
-        apka.getBilety().get(0).setAutoryzacja(true);
+        apka.kupnoBiletu(apka.getLoty().get(0), apka.getKlienci().get(0));
 
         boolean resultTest = true;
         // Nie wiem czy tak to siê obs³uguje lol
@@ -112,40 +110,22 @@ public class AplikacjaTestMocked implements TestExecutionExceptionHandler {
                 prac.getId(); result = 1;
 
                 lot.getId(); result = 1;
-                lot.getCena(); result = 100;
+                lot.getCena(); result = 1000;
                 lot.getNastepneWolneMiejsce(); result = 1;
 
-                bilet.getId(); result = 1;
-                // bilet.getCena(); result = 100.0f;
-
-                klient.getSaldo(); result = 500.0f;
                 klient.getId(); result = 1;
                 apka.getBilety().size(); result = 1;
                 // apka.getBilety().get(0).getAutoryzacja(); result = true;
             }
         };
-        System.out.println("Pracownik");
-        System.out.println(prac.mozeAutoryzowac());
-        System.out.println(prac.getId());
-        System.out.println("Lot");
-        System.out.println(lot.getId());
-        System.out.println(lot.getCena());
-        System.out.println(lot.getNastepneWolneMiejsce());
-        System.out.println("Klient");
-        System.out.println(klient.getId());
-        System.out.println(klient.getSaldo());
-        System.out.println("Apka");
-        System.out.println(apka.getBilety().size());
 
         apka.setLoty(new ArrayList<>(Arrays.asList(lot)));
         apka.setKlienci(new ArrayList<>(Arrays.asList(klient)));
         apka.kupnoBiletu(apka.getLoty().get(0), apka.getKlienci().get(0));//lot, klient);
 
-        System.out.println(apka.getBilety().get(0).getId());
         apka.getBilety().get(0).setAutoryzacja(true);
 
         boolean resultTest = true;
-        // Nie wiem czy tak to siê obs³uguje lol
         try {
             resultTest = apka.autoryzacjaSprzedazy(apka.getBilety().get(0), prac);
         }
@@ -155,5 +135,44 @@ public class AplikacjaTestMocked implements TestExecutionExceptionHandler {
         finally {
             assertEquals(false, resultTest);
         }
+    }
+
+    @Test
+    public void testAutoryzacjaSprzedazyAuthBilet() {
+        Aplikacja apka = new Aplikacja();
+        new Expectations() {
+            {
+                prac.mozeAutoryzowac(); result = true;
+                // prac.getId(); result = 1;
+
+                lot.getId(); result = 1;
+                lot.getCena(); result = 100;
+                lot.getNastepneWolneMiejsce(); result = 1;
+
+                bilet.getId(); result = 1;
+
+                klient.getId(); result = 1;
+                // klient.getSaldo(); result = 500.0f;
+                apka.getBilety().size(); result = 1;
+                // apka.getKlienci(); result = new ArrayList<Klient>(Arrays.asList(klient)); ???
+            }
+        };
+
+        apka.setLoty(new ArrayList<>(Arrays.asList(lot)));
+        apka.setKlienci(new ArrayList<>(Arrays.asList(klient)));
+        apka.kupnoBiletu(lot, klient);
+
+        apka.getBilety().get(0).setAutoryzacja(false);
+        System.out.println(apka.getBilety().get(0).getAutoryzacja());
+
+        boolean resultTest = true;
+        try {
+            resultTest = apka.autoryzacjaSprzedazy(apka.getBilety().get(0), prac);
+        }
+        catch (Exception e) {
+            resultTest = false;
+        }
+
+        assertEquals(true, resultTest);
     }
 }
