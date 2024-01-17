@@ -50,7 +50,7 @@ public class Klient {
 	 * @param c_nr_kontaBank
 	 */
 	public Klient(int c_id, String c_imie, String c_nazwisko, String c_email,
-				  int c_nr_telefonu, int c_nr_kontaBank, int saldo) {
+				  int c_nr_telefonu, int c_nr_kontaBank, float saldo) {
 		this(c_id, c_imie, c_nazwisko, c_email);
 		nr_telefonu = c_nr_telefonu;
 		nr_kontaBank = c_nr_kontaBank;

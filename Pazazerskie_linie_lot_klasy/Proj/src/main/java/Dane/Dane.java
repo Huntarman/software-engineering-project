@@ -11,7 +11,7 @@ public class Dane {
     public Dane(){}
 
     public Klient daneKlient[] = new Klient[]{
-        new Klient(1, "Michal", "Zajdel", "miczaj@gmail.com", 999929999,3213421,600),
+        new Klient(1, "Michal", "Zajdel", "miczaj@gmail.com", 999929999,3213421,600.0f),
         new Klient(2, "Kuba", "Lazorko", "kublaz@gmail.com", 119121911,1243123,400),
         new Klient(3, "Ramia", "Blau", "shar_simmersbz9@accommodations.vct", 43946, 312312, 1839),
         new Klient(4, "Claud", "Barna", "odell_millnera@webmasters.lv", 6462, 43421341, 575),
@@ -102,6 +102,9 @@ public class Dane {
         app.autoryzacjaSprzedazy(app.getBilety().get(2), app.getPracownicy().get(0));
         app.autoryzacjaSprzedazy(app.getBilety().get(3), app.getPracownicy().get(0));
 
+        app.zwrotBiletu(app.getKlienci().get(3).getBilety().get(0));
+        app.zwrotBiletu(app.getKlienci().get(3).getBilety().get(1));
+        app.zwrotBiletu(app.getKlienci().get(3).getBilety().get(2));
     }
     public void fillSamolot(Samolot samolot){
         LocalDateTime date1 = LocalDateTime.of(2024, Month.JANUARY,20,12,30);
