@@ -1,0 +1,9 @@
+---
+Suite
+Test: no
+---
+!1 Test suite ${PAGE_NAME}
+!contents -R2 -g -p -f -h
+
+"TestyFitnesse"
+!path C:\Users\kubal\Documents\VPProjects\software-engineering-project\FitnesseLab\target\classes

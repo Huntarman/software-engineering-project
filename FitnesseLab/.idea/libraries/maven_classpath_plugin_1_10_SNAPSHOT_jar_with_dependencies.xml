@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="maven-classpath-plugin-1.10-SNAPSHOT-jar-with-dependencies">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/plugins/maven-classpath-plugin-1.10-SNAPSHOT-jar-with-dependencies.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

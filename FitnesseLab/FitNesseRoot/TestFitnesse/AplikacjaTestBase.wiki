@@ -1,0 +1,6 @@
+---
+Test
+---
+!|testFitnesse.AplikacjaTestBase|
+|id_bilet|id_pracownik|autoryzacjaSprzedazy?|liczbaBiletow?|
+|5|0|true|6|
