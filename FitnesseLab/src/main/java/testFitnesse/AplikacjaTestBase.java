@@ -7,6 +7,7 @@ public class AplikacjaTestBase extends ColumnFixture {
 
     public boolean autoryzacjaSprzedazy () {
         int first = liczbaBiletow();
+
         try {
             SetUp.aplikacja.autoryzacjaSprzedazy(SetUp.aplikacja.getBilety().get(id_bilet), SetUp.aplikacja.getPracownicy().get(id_pracownik));
             int second = liczbaBiletow();
@@ -16,7 +17,6 @@ public class AplikacjaTestBase extends ColumnFixture {
 
         }
         return false;
-        // assertTrue(app.autoryzacjaSprzedazy(app.getBilety().get(id_bilet), app.getPracownicy().get(id_pracownik)));
     }
 
     public int liczbaBiletow() {

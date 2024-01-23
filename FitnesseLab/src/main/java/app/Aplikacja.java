@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.IllegalFormatCodePointException;
 
 public class Aplikacja {
 
@@ -14,6 +15,14 @@ public class Aplikacja {
 	private ArrayList<Pracownik> pracownicy = new ArrayList<>();
 	private ArrayList<Samolot> samoloty = new ArrayList<>();
 	private ArrayList<Bilet> bilety = new ArrayList<>();
+
+	public Aplikacja() {
+		klienci = new ArrayList<>();
+		loty = new ArrayList<>();
+		pracownicy = new ArrayList<>();
+		samoloty = new ArrayList<>();
+		bilety = new ArrayList<>();
+	}
 
 	public ArrayList<Lot> przegladanieLotow() {
 		return loty;
@@ -196,6 +205,15 @@ public class Aplikacja {
 		return this.klienci;
 	}
 
+	public boolean dodajKlient(Klient klient) {
+		if (this.klienci != null) {
+			return this.klienci.add(klient);
+		} else {
+			this.klienci = new ArrayList<>();  // Initialize samoloty before adding elements
+			return this.klienci.add(klient);
+		}
+	}
+
 	/**
 	 *
 	 * @param klienci
@@ -229,7 +247,17 @@ public class Aplikacja {
 	}
 
 	public ArrayList<Samolot> getSamoloty() {
-		return this.samoloty;
+		if (this.samoloty == null) return null;
+		else return this.samoloty;
+	}
+
+	public boolean dodajSamolot(Samolot samolot) {
+		if (this.samoloty != null) {
+			return this.samoloty.add(samolot);
+		} else {
+			this.samoloty = new ArrayList<>();  // Initialize samoloty before adding elements
+			return this.samoloty.add(samolot);
+		}
 	}
 
 	/**

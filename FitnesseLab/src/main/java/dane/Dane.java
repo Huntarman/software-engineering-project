@@ -44,8 +44,35 @@ public class Dane {
         new Samolot(2, "SotoLam",30),
         new Samolot(3, "Jonette", 35),
         new Samolot(4, "Danah", 105),
-        new Samolot(5, "Hasani", 55)
+        new Samolot(5, "Hasani", 64),
+        new Samolot(6, "Chiketa", 75),
+        new Samolot(7, "Edison", 88),
     };
+
+    public LocalDateTime daneDaty[] = new LocalDateTime[] {
+            LocalDateTime.of(2024, Month.JANUARY,20,12,30),
+            LocalDateTime.of(2024, Month.JANUARY,20,19,0),
+            LocalDateTime.of(2023, Month.DECEMBER,20,13,0),
+            LocalDateTime.of(2023, Month.DECEMBER,20,16,30),
+            LocalDateTime.of(2022, Month.DECEMBER,20,13,0),
+            LocalDateTime.of(2022, Month.DECEMBER,20,16,30),
+            LocalDateTime.of(2024, Month.JULY,22,17,0),
+            LocalDateTime.of(2024, Month.JULY,22,19,30),
+            LocalDateTime.of(2024, Month.JULY,22,18,0),
+            LocalDateTime.of(2024, Month.JULY,22,23,30)
+    };
+
+    public static void ustawArray(Aplikacja app) {
+        ArrayList<Klient> klienci = new ArrayList<>();
+        ArrayList<Lot> loty = new ArrayList<>();
+        ArrayList<Pracownik> pracownicy = new ArrayList<>();
+        ArrayList<Samolot> samoloty = new ArrayList<>();
+
+        app.setSamoloty(samoloty);
+        app.setLoty(loty);
+        app.setKlienci(klienci);
+        app.setPracownicy(pracownicy);
+    }
 
     public static void wypelnijDane(Aplikacja app){
         ArrayList<Klient> klienci = new ArrayList<>();

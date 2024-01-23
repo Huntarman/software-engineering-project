@@ -1,6 +1,10 @@
 ---
 Test
 ---
+!define TEST_SYSTEM {fit}
 !|testFitnesse.AplikacjaTestBase|
 |id_bilet|id_pracownik|autoryzacjaSprzedazy?|liczbaBiletow?|
 |5|0|true|6|
+|4|0|false|5|
+|5|1|false|5|
+|0|0|false|5|
