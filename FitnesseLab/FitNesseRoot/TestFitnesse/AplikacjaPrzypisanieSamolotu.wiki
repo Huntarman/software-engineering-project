@@ -1,0 +1,17 @@
+---
+Test
+---
+!include DodajLot
+!include DodajSamolot
+!define TEST_SYSTEM {fit}
+!|testFitnesse.AplikacjaPrzypisanieSamolotu|
+|id_lot|id_samolot|id_pracownik|przypisanieSamolotu?|
+|1|1|0|true|
+|5|1|0|false|
+|1|1|0|false|
+|3|0|0|false|
+|2|1|0|true|
+|5|2|0|true|
+|3|3|1|false|
+|3|3|0|false|
+|3|4|0|true|

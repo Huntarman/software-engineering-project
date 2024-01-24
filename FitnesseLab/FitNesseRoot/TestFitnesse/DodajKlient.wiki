@@ -1,0 +1,9 @@
+---
+Test
+---
+!define TEST_SYSTEM {fit}
+!|testFitnesse.DodajKlient|
+|index_klient|dodajKlient?|klientSize?|
+|2|true|5|
+|3|true|6|
+|4|true|7|

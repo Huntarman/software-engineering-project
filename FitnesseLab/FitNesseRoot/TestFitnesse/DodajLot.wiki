@@ -1,0 +1,12 @@
+---
+Test
+---
+!define TEST_SYSTEM {fit}
+!|testFitnesse.DodajLot|
+|index_lot|index_pracownik|dodajLot?|lotySize?|
+|0|0|true|6|
+|1|0|true|7|
+|2|0|true|8|
+|3|0|true|9|
+|4|1|false|9|
+|4|0|true|10|

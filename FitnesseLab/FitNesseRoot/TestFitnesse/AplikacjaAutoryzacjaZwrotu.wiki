@@ -1,0 +1,16 @@
+---
+Test
+---
+!include DodajKlient
+!include KupnoBiletu
+!define TEST_SYSTEM {fit}
+!|testFitnesse.AplikacjaAutoryzacjaZwrotu|
+|id_klient|id_pracownik|id_bilet|autoryzacjaZwrotu?|
+|3|0|2|true|
+|3|1|2|false|
+|3|0|3|false|
+|3|0|1|false|
+|3|0|0|false|
+|0|1|0|false|
+|0|0|0|false|
+|2|0|0|false|

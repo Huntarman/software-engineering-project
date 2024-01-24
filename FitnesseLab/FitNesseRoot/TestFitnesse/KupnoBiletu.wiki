@@ -1,0 +1,9 @@
+---
+Test
+---
+!define TEST_SYSTEM {fit}
+!|testFitnesse.KupnoBiletu|
+|index_lotu|index_klient|kupnoBiletu?|liczbaBiletow?|
+|2|0|true|7|
+|3|0|true|8|
+|4|1|true|9|

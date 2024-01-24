@@ -1,0 +1,11 @@
+---
+Test
+---
+!define TEST_SYSTEM {fit}
+!|testFitnesse.DodajSamolot|
+|index_samolot|dodajSamolot?|samolotySize?|
+|2|true|4|
+|3|true|5|
+|4|true|6|
+|5|true|7|
+|6|true|8|
